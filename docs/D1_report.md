@@ -274,10 +274,12 @@ Or rerun all D1 tests: `sudo python3 tests/d1_mininet_tests.py`.
 
 ---
 
-## Who presents what (suggested split for 3 members)
+## Who presents what
 
 | Member | D1 part | Shows in the demo |
 |---|---|---|
-| A | Problem, architecture, topology, POX controller (ARP for VIP, PacketIn, flow rules) | `demo.py`, `dump-flows` with `mod_nw_dst` / `mod_nw_src` |
-| B | TCP server (threads, workers, queue), client load generator, load report protocol | `curl` to the VIP, `client.py` with 8 threads, server logs |
-| C | Socket–SDN integration (report server, port stats, event log), tests and results | `watch.py` live view, D1 test table |
+| P1 Sanjith | Mininet topology, POX controller (ARP for the VIP, PacketIn, per-connection flow rules), D1 Mininet tests | `demo.py`, `dump-flows` with `mod_nw_dst` / `mod_nw_src`, D1 test table |
+| P2 Sammed | TCP server (threads, workers, queue), client load generator, traffic generator, load report protocol, socket tests | `curl` to the VIP, `client.py` with 8 threads, socket test output |
+| P3 Sharvesh | Problem and architecture, socket–SDN integration (reports into the decision logic), decision logic and its unit tests | architecture slide, `watch.py` live view, unit test output |
+
+Full roles for D1 and D2: [Team_Roles_D1_D2.pdf](Team_Roles_D1_D2.pdf).

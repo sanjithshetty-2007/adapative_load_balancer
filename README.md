@@ -200,10 +200,11 @@ pass ([results/d1/d1_test_report.md](results/d1/d1_test_report.md)).
 
 ## 7. Team
 
-| Member | Main parts |
-|---|---|
-| Member A | Topology, Mininet setup, POX controller (flow rules, ARP, port stats) |
-| Member B | TCP servers, load reports, client load generator, socket tests |
-| Member C | Decision logic, experiments, analysis, graphs, documentation |
+| Member | Role | Main files |
+|---|---|---|
+| P1 Sanjith | SDN controller and network: topology, POX controller (ARP for the VIP, flow rules, port stats, port status, flow deletion), test bed, D1 Mininet tests, live demo | `topology/`, `controller/adaptive_lb.py`, `experiments/mnlib.py`, `tests/d1_mininet_tests.py`, `demo.py` |
+| P2 Sammed | TCP application and robustness: multi-threaded servers, load report protocol, client load generator, traffic generator, socket tests, failure/overload scenarios, live view | `app/`, `tests/test_sockets.py`, `experiments/run_d2.py`, `experiments/watch.py` |
+| P3 Sharvesh | Adaptive decision logic and evaluation: server state, overload and failure detection, round robin and adaptive policies, unit tests, analysis, graphs, reports | `controller/lb_core.py`, `tests/test_lb_core.py`, `experiments/analyze.py`, `docs/` |
 
-(Replace with your names.)
+Roles, the problem statement and the D1 / D2 split per member are in
+[docs/Team_Roles_D1_D2.pdf](docs/Team_Roles_D1_D2.pdf).

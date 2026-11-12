@@ -343,6 +343,16 @@ tests `test_fresh_report_does_not_attract_a_burst`,
 5. `link s1 h3 down` / `up`.
 6. Show the D2 graphs.
 
+### Who presents what
+
+| Member | D2 part | Scenarios shown |
+|---|---|---|
+| P1 Sanjith | Dynamic SDN: port statistics, link failure via PortStatus, flow deletion for failed servers, live demo | E4 link flood, E6 link down |
+| P2 Sammed | Complete application and robustness: crash and hang detection, retries, scenario runner, watch.py | E3 overload, E5 crash + restart |
+| P3 Sharvesh | Adaptive policy, overload detection with hysteresis, performance evaluation and graphs | E1 equal, E2 unequal, results |
+
+Full roles for D1 and D2: [Team_Roles_D1_D2.pdf](Team_Roles_D1_D2.pdf).
+
 ### Viva questions to be ready for
 
 | Question | Short answer |
