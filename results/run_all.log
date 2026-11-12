@@ -1,0 +1,966 @@
+
+=================== Start Thu Nov 12 06:38:20 AM UTC 2026  (repo: /home/sanjithshetty/adaptive-load-balancer-mininet) ===================
+sudo is needed for Mininet. Type your VM password if asked.
+
+=================== 1. Install packages (only the missing ones) ===================
+Python 3.14.4
+2.3.0
+ovs-vsctl (Open vSwitch) 3.7.1
+
+=================== 2. Get the POX controller ===================
+5f82461 discovery/p3: Fixes such that discovery actually works again
+
+=================== 3. Unit tests: controller decision logic ===================
+test_busy_link_is_avoided (__main__.AdaptiveTests.test_busy_link_is_avoided) ... ok
+test_counts_assignments_between_reports (__main__.AdaptiveTests.test_counts_assignments_between_reports) ... ok
+test_counts_load_not_sent_by_controller (__main__.AdaptiveTests.test_counts_load_not_sent_by_controller) ... ok
+test_equal_servers_share_evenly (__main__.AdaptiveTests.test_equal_servers_share_evenly) ... ok
+test_estimate_drains_between_reports (__main__.AdaptiveTests.test_estimate_drains_between_reports) ... ok
+test_fresh_report_does_not_attract_a_burst (__main__.AdaptiveTests.test_fresh_report_does_not_attract_a_burst) ... ok
+test_no_server_until_reports (__main__.AdaptiveTests.test_no_server_until_reports) ... ok
+test_prefers_faster_server (__main__.AdaptiveTests.test_prefers_faster_server) ... ok
+test_prefers_least_loaded (__main__.AdaptiveTests.test_prefers_least_loaded) ... ok
+test_all_down (__main__.FailureTests.test_all_down) ... ok
+test_heartbeat_timeout (__main__.FailureTests.test_heartbeat_timeout) ... ok
+test_port_down_and_up (__main__.FailureTests.test_port_down_and_up) ... ok
+test_recovery_after_restart (__main__.FailureTests.test_recovery_after_restart) ... ok
+test_report_connection_closed (__main__.FailureTests.test_report_connection_closed) ... ok
+test_all_overloaded_still_serves (__main__.OverloadTests.test_all_overloaded_still_serves) ... ok
+test_back_to_normal_when_like_peers (__main__.OverloadTests.test_back_to_normal_when_like_peers) ... ok
+test_busy_link_is_overload (__main__.OverloadTests.test_busy_link_is_overload) ... ok
+test_equally_busy_pool_is_not_flagged (__main__.OverloadTests.test_equally_busy_pool_is_not_flagged) ... ok
+test_hysteresis_before_normal (__main__.OverloadTests.test_hysteresis_before_normal) ... ok
+test_long_queue_is_overload (__main__.OverloadTests.test_long_queue_is_overload) ... ok
+test_overloaded_server_still_gets_a_trickle (__main__.OverloadTests.test_overloaded_server_still_gets_a_trickle) ... ok
+test_slow_server_marked_overloaded_and_skipped (__main__.OverloadTests.test_slow_server_marked_overloaded_and_skipped) ... ok
+test_parse (__main__.ParseTests.test_parse) ... ok
+test_reject (__main__.ParseTests.test_reject) ... ok
+test_cycles_in_order (__main__.RoundRobinTests.test_cycles_in_order) ... ok
+test_ignores_load_and_health (__main__.RoundRobinTests.test_ignores_load_and_health) ... ok
+
+----------------------------------------------------------------------
+Ran 26 tests in 0.002s
+
+OK
+
+=================== 4. Socket tests on localhost: server, client, load reports ===================
+test_dead_server_counted_as_failure (__main__.FailureTests.test_dead_server_counted_as_failure) ... ok
+test_report_link_closes_when_server_dies (__main__.FailureTests.test_report_link_closes_when_server_dies) ... ok
+test_1_single_request (__main__.SocketTests.test_1_single_request) ... ok
+test_2_concurrent_requests (__main__.SocketTests.test_2_concurrent_requests) ... ok
+test_3_worker_limit_causes_queueing (__main__.SocketTests.test_3_worker_limit_causes_queueing) ... ok
+test_4_load_reports_reach_controller (__main__.SocketTests.test_4_load_reports_reach_controller) ... ok
+test_5_reports_show_load_while_busy (__main__.SocketTests.test_5_reports_show_load_while_busy) ... ok
+test_6_http_get_for_curl (__main__.SocketTests.test_6_http_get_for_curl) ... ok
+test_7_bad_request_does_not_crash (__main__.SocketTests.test_7_bad_request_does_not_crash) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 14.083s
+
+OK
+
+=================== 5. D1: end-to-end tests in Mininet with POX ===================
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+[PASS] T1 All hosts reach each other through s1 (pingall) - packet loss 0.0%
+[PASS] T2 curl to the virtual IP gets a server reply - Served by: h1
+[PASS] T3 Controller answers ARP for the VIP - 10.0.0.100 dev h4-eth0 lladdr 00:00:00:00:01:00 REACHABLE
+[PASS] T4 Round robin spreads 30 requests over 3 servers - per server: {'h1': 10, 'h2': 10, 'h3': 10}
+[PASS] T5 4 client hosts x 8 threads x 10 requests at once - 320/320 succeeded, served by ['h1', 'h2', 'h3']
+[PASS] T6 Switch holds forward and reverse rewrite rules - 208 forward (VIP->server) and 209 reverse (server->VIP) rules seen
+[PASS] T7 Clients only see the VIP, never a server IP - peer addresses seen: ['10.0.0.100']
+[PASS] T8 Servers send load reports to the controller over TCP - LOAD messages received: {'h1': 20, 'h2': 20, 'h3': 23}
+[PASS] T9 Controller placed each new TCP connection (PacketIn -> FlowMod) - 351 connections placed: {'h1': 117, 'h2': 117, 'h3': 117}
+[PASS] T10 Controller polls switch port statistics - 10 samples, last: {'h1': {'to_server_mbps': 0.01, 'from_server_mbps': 0.001, 'util': 0.001}, 'h2': {'to_server_mbps': 0.01, 'from_server_mbps': 0.001, 'util': 0.001}, 'h3': {'to_server_mbps': 0.011, 'from_server_mbps': 0.002, 'util': 0.001}}
+
+D1: 10/10 passed
+
+=================== 6. D2: experiments, static round robin vs adaptive (3 reps) ===================
+[1/48] elapsed 0 s
+
+=== e1_low | rr | rep 1 ===
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+[2/48] elapsed 37 s
+
+=== e1_low | adaptive | rep 1 ===
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+[3/48] elapsed 72 s
+
+=== e1_med | rr | rep 1 ===
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+[4/48] elapsed 109 s
+
+=== e1_med | adaptive | rep 1 ===
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+[5/48] elapsed 146 s
+
+=== e1_high | rr | rep 1 ===
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+[6/48] elapsed 185 s
+
+=== e1_high | adaptive | rep 1 ===
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+[7/48] elapsed 223 s
+
+=== e2_hetero | rr | rep 1 ===
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+[8/48] elapsed 255 s
+
+=== e2_hetero | adaptive | rep 1 ===
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+[9/48] elapsed 289 s
+
+=== e3_overload | rr | rep 1 ===
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+[10/48] elapsed 327 s
+
+=== e3_overload | adaptive | rep 1 ===
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+[11/48] elapsed 358 s
+
+=== e4_netload | rr | rep 1 ===
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+[12/48] elapsed 389 s
+
+=== e4_netload | adaptive | rep 1 ===
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+[13/48] elapsed 421 s
+
+=== e5_crash | rr | rep 1 ===
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+[14/48] elapsed 454 s
+
+=== e5_crash | adaptive | rep 1 ===
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+[15/48] elapsed 487 s
+
+=== e6_linkdown | rr | rep 1 ===
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+[16/48] elapsed 524 s
+
+=== e6_linkdown | adaptive | rep 1 ===
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+[17/48] elapsed 556 s
+
+=== e1_low | rr | rep 2 ===
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+[18/48] elapsed 591 s
+
+=== e1_low | adaptive | rep 2 ===
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+[19/48] elapsed 626 s
+
+=== e1_med | rr | rep 2 ===
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+[20/48] elapsed 659 s
+
+=== e1_med | adaptive | rep 2 ===
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+[21/48] elapsed 690 s
+
+=== e1_high | rr | rep 2 ===
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+[22/48] elapsed 725 s
+
+=== e1_high | adaptive | rep 2 ===
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+[23/48] elapsed 763 s
+
+=== e2_hetero | rr | rep 2 ===
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+[24/48] elapsed 800 s
+
+=== e2_hetero | adaptive | rep 2 ===
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+[25/48] elapsed 833 s
+
+=== e3_overload | rr | rep 2 ===
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+[26/48] elapsed 866 s
+
+=== e3_overload | adaptive | rep 2 ===
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+[27/48] elapsed 903 s
+
+=== e4_netload | rr | rep 2 ===
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+[28/48] elapsed 939 s
+
+=== e4_netload | adaptive | rep 2 ===
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+[29/48] elapsed 970 s
+
+=== e5_crash | rr | rep 2 ===
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+[30/48] elapsed 1001 s
+
+=== e5_crash | adaptive | rep 2 ===
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+[31/48] elapsed 1035 s
+
+=== e6_linkdown | rr | rep 2 ===
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+[32/48] elapsed 1070 s
+
+=== e6_linkdown | adaptive | rep 2 ===
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+[33/48] elapsed 1102 s
+
+=== e1_low | rr | rep 3 ===
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+[34/48] elapsed 1133 s
+
+=== e1_low | adaptive | rep 3 ===
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+[35/48] elapsed 1166 s
+
+=== e1_med | rr | rep 3 ===
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+[36/48] elapsed 1196 s
+
+=== e1_med | adaptive | rep 3 ===
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+[37/48] elapsed 1226 s
+
+=== e1_high | rr | rep 3 ===
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+[38/48] elapsed 1256 s
+
+=== e1_high | adaptive | rep 3 ===
+/bin/sh: 1: dpctl: not found
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+[39/48] elapsed 1287 s
+
+=== e2_hetero | rr | rep 3 ===
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+[40/48] elapsed 1317 s
+
+=== e2_hetero | adaptive | rep 3 ===
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+[41/48] elapsed 1348 s
+
+=== e3_overload | rr | rep 3 ===
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+[42/48] elapsed 1377 s
+
+=== e3_overload | adaptive | rep 3 ===
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+[43/48] elapsed 1408 s
+
+=== e4_netload | rr | rep 3 ===
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+[44/48] elapsed 1440 s
+
+=== e4_netload | adaptive | rep 3 ===
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+[45/48] elapsed 1470 s
+
+=== e5_crash | rr | rep 3 ===
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+[46/48] elapsed 1501 s
+
+=== e5_crash | adaptive | rep 3 ===
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+[47/48] elapsed 1532 s
+
+=== e6_linkdown | rr | rep 3 ===
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+[48/48] elapsed 1565 s
+
+=== e6_linkdown | adaptive | rep 3 ===
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+*** Error: Warning: sch_htb: quantum of class 50001 is big. Consider r2q change.
+
+All runs finished in 1595 s
+
+=================== 7. D2: analysis, tables and graphs ===================
+graphs written to /home/sanjithshetty/adaptive-load-balancer-mininet/results/d2/graphs
+48 runs analysed; summary in /home/sanjithshetty/adaptive-load-balancer-mininet/results/d2/summary.md
+
+=================== Done Thu Nov 12 07:05:45 AM UTC 2026 ===================
+D1 report: /home/sanjithshetty/adaptive-load-balancer-mininet/results/d1/d1_test_report.md
+D2 report: /home/sanjithshetty/adaptive-load-balancer-mininet/results/d2/summary.md

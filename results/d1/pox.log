@@ -1,0 +1,36 @@
+WARNING:version:POX requires one of the following versions of Python: 3.6 3.7 3.8 3.9
+WARNING:version:You're running Python 3.14.
+WARNING:version:If you run into problems, try using a supported version.
+ERROR:packet:(dns) parsing questions: ord() expected string of length 1, but int found
+WARNING:.home.sanjithshetty.adaptive-load-balancer-mininet.controller.adaptive_lb:h1 SERVER_UP (load reports received)
+WARNING:.home.sanjithshetty.adaptive-load-balancer-mininet.controller.adaptive_lb:h2 SERVER_UP (load reports received)
+WARNING:.home.sanjithshetty.adaptive-load-balancer-mininet.controller.adaptive_lb:h3 SERVER_UP (load reports received)
+ERROR:packet:(dns) parsing questions: ord() expected string of length 1, but int found
+ERROR:packet:(dns) parsing questions: ord() expected string of length 1, but int found
+ERROR:packet:(dns) parsing answers: ord() expected string of length 1, but int found
+ERROR:packet:(dns) parsing questions: ord() expected string of length 1, but int found
+ERROR:packet:(dns) parsing questions: ord() expected string of length 1, but int found
+ERROR:packet:(dns) parsing questions: ord() expected string of length 1, but int found
+ERROR:packet:(dns) parsing questions: ord() expected string of length 1, but int found
+ERROR:packet:(dns) parsing answers: ord() expected string of length 1, but int found
+ERROR:packet:(dns) parsing questions: ord() expected string of length 1, but int found
+ERROR:packet:(dns) parsing questions: ord() expected string of length 1, but int found
+ERROR:packet:(dns) parsing answers: ord() expected string of length 1, but int found
+ERROR:packet:(dns) parsing questions: ord() expected string of length 1, but int found
+ERROR:packet:(dns) parsing questions: ord() expected string of length 1, but int found
+ERROR:packet:(dns) parsing answers: ord() expected string of length 1, but int found
+ERROR:packet:(dns) parsing answers: ord() expected string of length 1, but int found
+ERROR:packet:(dns) parsing answers: ord() expected string of length 1, but int found
+ERROR:packet:(dns) parsing questions: ord() expected string of length 1, but int found
+ERROR:packet:(dns) parsing questions: ord() expected string of length 1, but int found
+ERROR:packet:(dns) parsing answers: ord() expected string of length 1, but int found
+ERROR:packet:(dns) parsing answers: ord() expected string of length 1, but int found
+ERROR:packet:(dns) parsing answers: ord() expected string of length 1, but int found
+ERROR:packet:(dns) parsing questions: ord() expected string of length 1, but int found
+ERROR:packet:(dns) parsing answers: ord() expected string of length 1, but int found
+ERROR:packet:(dns) parsing answers: ord() expected string of length 1, but int found
+ERROR:packet:(dns) parsing questions: ord() expected string of length 1, but int found
+ERROR:packet:(dns) parsing questions: ord() expected string of length 1, but int found
+WARNING:.home.sanjithshetty.adaptive-load-balancer-mininet.controller.adaptive_lb:h2 SERVER_DOWN (report connection closed)
+WARNING:.home.sanjithshetty.adaptive-load-balancer-mininet.controller.adaptive_lb:h1 SERVER_DOWN (report connection closed)
+WARNING:.home.sanjithshetty.adaptive-load-balancer-mininet.controller.adaptive_lb:h3 SERVER_DOWN (report connection closed)

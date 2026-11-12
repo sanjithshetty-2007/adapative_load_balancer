@@ -1,0 +1,17 @@
+{
+  "requests": 30,
+  "ok": 30,
+  "failed": 0,
+  "retried": 0,
+  "avg_ms": 172.3,
+  "p50_ms": 164.5,
+  "p95_ms": 282.1,
+  "max_ms": 366.4,
+  "throughput_rps": 5.8,
+  "per_server": {
+    "h1": 10,
+    "h2": 10,
+    "h3": 10
+  },
+  "client": "h4"
+}

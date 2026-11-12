@@ -1,149 +1,209 @@
-# Adaptive Load Balancer Using Mininet
+# Adaptive Load Balancer with SDN (Mininet + POX)
 
-## 1. Project Overview
+CN mini project #20. Multiple TCP application servers sit behind one
+virtual IP. An SDN controller (POX, OpenFlow 1.0) decides, for every new
+TCP connection, which server gets it, using live **server load** (reported
+by the servers over a TCP socket) and **network load** (measured from switch
+port counters). It detects **overloaded** and **failed** servers and reacts
+by installing different flow rules. A static round robin mode is included
+as the baseline, and the two are compared in repeated experiments.
 
-This project implements an adaptive software-based load balancer
-using Python and Mininet.
+| Deliverable | Report | Raw results |
+|---|---|---|
+| D1: design, sockets, Mininet + SDN, first tests | [docs/D1_report.md](docs/D1_report.md) | [results/d1/](results/d1/) |
+| D2: full system, dynamic SDN, robustness, evaluation | [docs/D2_report.md](docs/D2_report.md) | [results/d2/](results/d2/) |
 
-The load balancer distributes incoming HTTP requests between
-multiple backend servers based on their active request counts.
+## 1. Architecture
 
-It performs backend health checks and avoids routing requests
-to unavailable servers.
+```
+                         POX controller  (controller/adaptive_lb.py)
+                         +-------------------------------------------+
+   load reports  ------> | report server :9000  -> Pool (lb_core.py) |
+   (TCP, every 0.5 s)    | port stats every 1 s -> link utilisation  |
+                         | PacketIn -> choose server -> 2 FlowMods   |
+                         +---------------------+---------------------+
+                                               | OpenFlow 1.0 (:6633)
+     clients                                   |                 TCP servers
+   h4 10.0.0.4 ---\                     +------+------+       /--- h1 10.0.0.1 :8080
+   h5 10.0.0.5 ----+---- 100 Mbit/s ----|     s1      |-------+--- h2 10.0.0.2 :8080
+   h6 10.0.0.6 ----+                    |  (OVS)      | 10    \--- h3 10.0.0.3 :8080
+   h7 10.0.0.7 ---/                     +------+------+ Mbit/s
+                                               |
+                                  ctl 10.0.0.254 (root namespace, lets the
+                                  servers reach the controller's :9000)
 
-## 2. Network Architecture
+   Clients connect to the virtual IP 10.0.0.100:8080. No host owns it:
+   the controller answers ARP for it and rewrites addresses in the switch.
+```
 
-The Mininet topology contains four hosts and one Open vSwitch.
+What happens for one client connection:
 
-| Host | Role | IP Address |
-|------|------|------------|
-| h1 | Client | 10.0.0.1 |
-| h2 | Load Balancer | 10.0.0.2 |
-| h3 | Backend Server 1 | 10.0.0.3 |
-| h4 | Backend Server 2 | 10.0.0.4 |
+1. The client sends ARP "who has 10.0.0.100?". The controller replies
+   with the VIP MAC `00:00:00:00:01:00`.
+2. The client's TCP SYN to 10.0.0.100:8080 has no matching rule, so the
+   switch sends it to the controller (PacketIn).
+3. The controller picks a server (round robin or adaptive, see section 4)
+   and installs two exact-match rules (priority 1000, idle timeout 10 s):
+   * forward: client to VIP, rewritten to the chosen server's MAC/IP
+   * reverse: server to client, rewritten back to the VIP's MAC/IP
+4. The SYN is sent on, and the rest of the connection stays in the
+   switch. The client only ever sees the VIP.
 
-Switch: s1
+Other traffic (ARP between hosts, load reports, direct traffic) uses
+normal L2 learning rules (priority 10).
 
-## 3. Backend Configuration
+## 2. Components
 
-Backend 1:
-- Host: h3
-- Port: 9001
-- Simulated processing delay: 0.8 seconds
+| File | What it does |
+|---|---|
+| [app/backend_server.py](app/backend_server.py) | Multi-threaded TCP server with a fixed number of workers (queueing when busy). Sends `LOAD` reports to the controller every 0.5 s. Also answers HTTP GET for `curl`. |
+| [app/client.py](app/client.py) | Load generator: many threads, one new TCP connection per request, timeout and retry. Writes a CSV per request plus a JSON summary. |
+| [app/traffic_gen.py](app/traffic_gen.py) | Bulk TCP sender/sink used to flood a server link (network load). |
+| [controller/adaptive_lb.py](controller/adaptive_lb.py) | POX module: ARP for the VIP, PacketIn handling, flow rules, port statistics, port status, report server, event log. |
+| [controller/lb_core.py](controller/lb_core.py) | Decision logic with no POX imports (unit tested): server state, overload and failure detection, round robin and adaptive choice. |
+| [topology/topology.py](topology/topology.py) | Mininet topology (3 servers, 4 clients, 1 switch, `ctl` host, TCLink bandwidths). |
+| [experiments/mnlib.py](experiments/mnlib.py) | Starts POX + Mininet + servers for tests and experiments, reads the event log. |
+| [tests/](tests/) | Unit tests, localhost socket tests, D1 Mininet tests. |
+| [experiments/run_d2.py](experiments/run_d2.py), [analyze.py](experiments/analyze.py) | D2 scenarios (round robin vs adaptive, repeated) and the tables/graphs. |
+| [demo.py](demo.py), [experiments/watch.py](experiments/watch.py) | Live demo: network + Mininet CLI, and a live view of the controller. |
+| [legacy/](legacy/) | The first version (a user-space HTTP proxy, no SDN), kept for reference. |
 
-Backend 2:
-- Host: h4
-- Port: 9001
-- Simulated processing delay: 0.1 seconds
+### Socket protocols
 
-Load Balancer:
-- Host: h2
-- Port: 8000
+| Link | Transport | Message |
+|---|---|---|
+| client to server (via VIP) | TCP :8080, one request per connection | `REQ <id> <size> [work_ms]\n` then reply `RESP <id> <server> <size>\n` + `size` bytes |
+| server to controller | TCP :9000, long-lived connection | `LOAD h1 workers=4 active=6 queued=2 svc_ms=50.3 avg_ms=81.2 rps=40.0 served=812\n` every 0.5 s |
+| controller to switch | OpenFlow 1.0 :6633 | PacketIn, FlowMod (with `mod_nw_dst` / `mod_nw_src`), PortStats, PortStatus, PacketOut |
 
-## 4. Load Balancing Algorithm
+`active` = connections on the server (working + waiting), `queued` =
+waiting for a worker, `svc_ms` = average pure service time, `avg_ms` =
+average response time including waiting (both over the last 2 s).
 
-The load balancer uses the following procedure:
+## 3. Monitoring and detection
 
-1. Receive an incoming client request.
-2. Check the health of configured backend servers.
-3. Identify the healthy backend servers.
-4. Read the active request count of each healthy backend.
-5. Select the backend with the lowest active request count.
-6. Use round-robin selection when multiple backends have
-   the same active request count.
-7. Forward the client request to the selected backend.
-8. Forward the backend response to the client.
-9. Decrease the selected backend's active request count.
+| What | How | Detected within |
+|---|---|---|
+| Server load | `LOAD` reports over TCP every 0.5 s | 0.5 s |
+| Network load | OpenFlow port statistics every 1 s; utilisation = max(tx, rx) / 10 Mbit/s | ~1.2 s |
+| Overloaded server | avg response > 250 ms, or queue > 2 x workers, **and** clearly worse than the other servers; or link > 80 % busy. Back to normal below 70 % of the thresholds, or once it is no worse than its peers (hysteresis). | 0.5 to 1.2 s |
+| Server process failure | the report connection closes | ~0.01 s |
+| Hung / unreachable server | no report for 2 s (heartbeat) | 2 s |
+| Link failure | OpenFlow PortStatus (link down) | ~0.06 s |
 
-If no healthy backend is available, the load balancer
-returns HTTP 503 Service Unavailable.
+## 4. Balancing policies
 
-If the backend connection fails during forwarding,
-the load balancer returns HTTP 502 Bad Gateway.
+**Static round robin (`--mode=rr`)**: h1, h2, h3, h1, ... It ignores load and
+health. This is the baseline.
 
-## 5. Project Structure
+**Adaptive (`--mode=adaptive`)**: for each new connection, pick the healthy
+server with the lowest expected completion time:
 
-adaptive-load-balancer/
-|
-|-- app/
-|   |-- backend_server.py
-|   |-- load_balancer.py
-|
-|-- topology/
-|   |-- topology.py
-|
-|-- tests/
-|
-|-- results/
-|
-|-- README.md
-|-- .gitignore
+```
+cost(s) = (estimated connections on s + 1) / workers(s) x svc_ms(s)
+          x (1 + 4 x link_utilisation(s)^2)
+          x 3 if s is overloaded
+```
 
-## 6. Requirements
+* **Estimated connections** start from the last report's `active`. The
+  controller adds every connection it sends to s, and subtracts the ones
+  s should have finished since (each busy worker finishes one per
+  `svc_ms`). Every report resets the estimate to the true value. This
+  keeps decisions accurate between reports, which are 0.5 s apart.
+* **Failed** servers (report closed, heartbeat lost, port down) get
+  nothing. Their flow rules are deleted, so clients do not wait on a
+  dead path.
+* **Overloaded** servers are penalised (x3) rather than cut off. They still
+  get a little traffic, so their measurements stay fresh and they can
+  recover.
+* If every server is down, new connections are dropped until one comes
+  back.
 
-- Ubuntu Linux
-- Python 3
-- Mininet
-- Open vSwitch
-- curl
+Why these choices are explained in [docs/D2_report.md](docs/D2_report.md#design-decisions),
+including the problems found in the first version and how they were fixed.
 
-## 7. Running the Project
+## 5. How to run
 
-From the project directory, start Mininet:
+Tested on Ubuntu with Mininet 2.3, Open vSwitch 3.7, POX
+(`gar-experimental`) and Python 3.
 
-sudo mn --custom topology/topology.py --topo adaptive
+### Everything at once (D1 tests + D2 experiments + graphs)
 
-Start Backend 1:
+```bash
+git clone <this repo> && cd adaptive-load-balancer-mininet
+bash run_all.sh            # about 30 min; REPS=1 bash run_all.sh for ~12 min
+```
 
-h3 python3 /home/sharsem3/adaptive-load-balancer/app/backend_server.py --name backend1 --port 9001 --delay 0.8 &
+`run_all.sh` installs any missing packages (mininet, openvswitch-switch,
+python3-matplotlib), clones POX into `~/pox`, then runs:
 
-Start Backend 2:
+1. `python3 tests/test_lb_core.py`: unit tests of the decision logic
+2. `python3 tests/test_sockets.py`: server, client and load reports on localhost
+3. `sudo python3 tests/d1_mininet_tests.py`: D1 end-to-end tests, written to `results/d1/`
+4. `sudo python3 experiments/run_d2.py --reps 3`: D2 experiments, written to `results/d2/raw/`
+5. `python3 experiments/analyze.py`: tables and graphs in `results/d2/`
 
-h4 python3 /home/sharsem3/adaptive-load-balancer/app/backend_server.py --name backend2 --port 9001 --delay 0.1 &
+Run only some D2 scenarios: `sudo python3 experiments/run_d2.py --only e2_hetero,e5_crash --reps 1`.
 
-Start the load balancer:
+### Live demo
 
-h2 python3 /home/sharsem3/adaptive-load-balancer/app/load_balancer.py --listen-port 8000 --backends 10.0.0.3:9001,10.0.0.4:9001 &
+```bash
+sudo python3 demo.py                 # adaptive; --mode rr for round robin; --unequal
+python3 experiments/watch.py         # second terminal: live controller view
+```
 
-Send a request from the client:
+`demo.py` prints the commands to try at the `mininet>` prompt: curl the
+VIP, run clients, overload h1, flood a link, kill a server, take a link
+down.
 
-h1 curl http://10.0.0.2:8000
+### By hand (three terminals)
 
-## 8. Testing
+```bash
+# 1: controller
+cd ~/pox && PYTHONPATH=~/adaptive-load-balancer-mininet/controller \
+  python3 pox.py openflow.of_01 --port=6633 adaptive_lb --mode=adaptive \
+  --events=/tmp/events.jsonl
 
-The following tests have been performed:
+# 2: network
+cd ~/adaptive-load-balancer-mininet
+sudo mn --custom topology/topology.py --topo adaptive --link tc --mac \
+        --switch ovsk --controller remote,ip=127.0.0.1,port=6633
+mininet> h1 python3 app/backend_server.py --name h1 --report-to 10.0.0.254:9000 &
+mininet> h2 python3 app/backend_server.py --name h2 --report-to 10.0.0.254:9000 &
+mininet> h3 python3 app/backend_server.py --name h3 --report-to 10.0.0.254:9000 &
+mininet> h4 python3 app/client.py --threads 8 --requests 10
 
-1. Mininet connectivity test:
-   All four hosts successfully communicated.
+# 3: watch
+tail -f /tmp/events.jsonl
+```
 
-2. Sequential request test:
-   Requests were successfully forwarded to both backends.
+Controller options: `--mode=rr|adaptive --overload_ms=250 --overload_queue=2
+--overload_util=0.8 --heartbeat=2 --stats_interval=1 --link_mbps=10`.
 
-3. Concurrent request test:
-   Eight simultaneous requests were successfully handled.
+## 6. Results in short
 
-4. Backend failure test:
-   Requests continued through the surviving backend.
+Mean of 3 runs per case, 20 s each, 4 client hosts. Full tables and
+graphs: [docs/D2_report.md](docs/D2_report.md).
 
-5. Complete backend failure test:
-   HTTP 503 was returned when no healthy backend remained.
+| Scenario | p95 latency RR / adaptive | Throughput RR / adaptive | Failed requests RR / adaptive |
+|---|---|---|---|
+| Equal servers, 32 threads | 256 / 253 ms | 196 / 199 req/s | 0 / 0 |
+| Unequal servers | 533 / 186 ms | 79 / 159 req/s | 0 / 0 |
+| One server overloaded | 825 / 165 ms | 114 / 147 req/s | 0 / 0 |
+| One server link flooded | 252 / 183 ms | 139 / 150 req/s | 0 / 0 |
+| Server crash + restart | 272 / 166 ms | 142 / 158 req/s | 2.55 % / 0 |
+| Server link down + up | 141 / 165 ms (p99 1899 / 280) | 116 / 157 req/s | 0.43 % / 0 |
 
-6. Backend recovery test:
-   A restarted backend became available for subsequent requests.
+Detection: crash 0.01 s, link down 0.05 s, server overload 0.45 s,
+network overload 1.4 s. Tests: 26 unit, 9 socket and 10 D1 Mininet tests
+pass ([results/d1/d1_test_report.md](results/d1/d1_test_report.md)).
 
-## 9. Limitations
+## 7. Team
 
-- Backend load is estimated using active request counts.
-- CPU and memory utilisation are not measured.
-- Health checks use TCP connection availability.
-- HTTP forwarding is designed for simple HTTP requests.
-- This implementation runs as a user-space proxy and does not
-  implement an OpenFlow controller.
+| Member | Main parts |
+|---|---|
+| Member A | Topology, Mininet setup, POX controller (flow rules, ARP, port stats) |
+| Member B | TCP servers, load reports, client load generator, socket tests |
+| Member C | Decision logic, experiments, analysis, graphs, documentation |
 
-## 10. Future Improvements
-
-- Add CPU and memory utilisation monitoring.
-- Implement periodic health monitoring.
-- Improve HTTP request and response handling.
-- Compare adaptive selection against round-robin scheduling.
-- Add performance benchmarking and visualisation.
+(Replace with your names.)

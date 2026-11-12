@@ -5,3 +5,9 @@ venv/
 .env
 *.log
 .DS_Store
+
+# Test evidence is kept (logs under results/ are part of it)
+!results/**/*.log
+# Raw D2 runs are committed as results/d2/raw.tgz instead of loose files
+results/d2/raw/
+results/demo/

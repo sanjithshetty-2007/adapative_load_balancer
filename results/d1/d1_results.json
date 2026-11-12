@@ -1,0 +1,67 @@
+{
+  "passed": 10,
+  "total": 10,
+  "seconds": 19.7,
+  "tests": [
+    {
+      "id": "T1",
+      "test": "All hosts reach each other through s1 (pingall)",
+      "status": "PASS",
+      "evidence": "packet loss 0.0%"
+    },
+    {
+      "id": "T2",
+      "test": "curl to the virtual IP gets a server reply",
+      "status": "PASS",
+      "evidence": "Served by: h1"
+    },
+    {
+      "id": "T3",
+      "test": "Controller answers ARP for the VIP",
+      "status": "PASS",
+      "evidence": "10.0.0.100 dev h4-eth0 lladdr 00:00:00:00:01:00 REACHABLE"
+    },
+    {
+      "id": "T4",
+      "test": "Round robin spreads 30 requests over 3 servers",
+      "status": "PASS",
+      "evidence": "per server: {'h1': 10, 'h2': 10, 'h3': 10}"
+    },
+    {
+      "id": "T5",
+      "test": "4 client hosts x 8 threads x 10 requests at once",
+      "status": "PASS",
+      "evidence": "320/320 succeeded, served by ['h1', 'h2', 'h3']"
+    },
+    {
+      "id": "T6",
+      "test": "Switch holds forward and reverse rewrite rules",
+      "status": "PASS",
+      "evidence": "208 forward (VIP->server) and 209 reverse (server->VIP) rules seen"
+    },
+    {
+      "id": "T7",
+      "test": "Clients only see the VIP, never a server IP",
+      "status": "PASS",
+      "evidence": "peer addresses seen: ['10.0.0.100']"
+    },
+    {
+      "id": "T8",
+      "test": "Servers send load reports to the controller over TCP",
+      "status": "PASS",
+      "evidence": "LOAD messages received: {'h1': 20, 'h2': 20, 'h3': 23}"
+    },
+    {
+      "id": "T9",
+      "test": "Controller placed each new TCP connection (PacketIn -> FlowMod)",
+      "status": "PASS",
+      "evidence": "351 connections placed: {'h1': 117, 'h2': 117, 'h3': 117}"
+    },
+    {
+      "id": "T10",
+      "test": "Controller polls switch port statistics",
+      "status": "PASS",
+      "evidence": "10 samples, last: {'h1': {'to_server_mbps': 0.01, 'from_server_mbps': 0.001, 'util': 0.001}, 'h2': {'to_server_mbps': 0.01, 'from_server_mbps': 0.001, 'util': 0.001}, 'h3': {'to_server_mbps': 0.011, 'from_server_mbps': 0.002, 'util': 0.001}}"
+    }
+  ]
+}

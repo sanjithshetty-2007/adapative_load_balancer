@@ -1,0 +1,99 @@
+{
+  "e1_low": {
+    "title": "Equal servers, low load (8 client threads)",
+    "delays": [
+      0.05,
+      0.05,
+      0.05
+    ],
+    "threads": 8
+  },
+  "e1_med": {
+    "title": "Equal servers, medium load (16 client threads)",
+    "delays": [
+      0.05,
+      0.05,
+      0.05
+    ],
+    "threads": 16
+  },
+  "e1_high": {
+    "title": "Equal servers, high load (32 client threads)",
+    "delays": [
+      0.05,
+      0.05,
+      0.05
+    ],
+    "threads": 32
+  },
+  "e2_hetero": {
+    "title": "Unequal servers: h1 fast (20 ms), h2 50 ms, h3 slow (150 ms)",
+    "delays": [
+      0.02,
+      0.05,
+      0.15
+    ],
+    "threads": 16
+  },
+  "e3_overload": {
+    "title": "Server overload: extra heavy traffic sent straight to h1 from 5 s to 15 s",
+    "delays": [
+      0.05,
+      0.05,
+      0.05
+    ],
+    "threads": 16,
+    "hog": {
+      "at": 5,
+      "seconds": 10,
+      "host": "h7",
+      "target": "10.0.0.1",
+      "threads": 8,
+      "work_ms": 400
+    }
+  },
+  "e4_netload": {
+    "title": "Network load: h1's link flooded with bulk traffic from 5 s to 15 s",
+    "delays": [
+      0.05,
+      0.05,
+      0.05
+    ],
+    "threads": 16,
+    "flood": {
+      "at": 5,
+      "seconds": 10,
+      "src": "h1",
+      "dst": "h7",
+      "dst_ip": "10.0.0.7"
+    }
+  },
+  "e5_crash": {
+    "title": "Server failure: h2's server process killed at 7 s, restarted at 14 s",
+    "delays": [
+      0.05,
+      0.05,
+      0.05
+    ],
+    "threads": 16,
+    "crash": {
+      "server": "h2",
+      "at": 7,
+      "restart": 14
+    }
+  },
+  "e6_linkdown": {
+    "title": "Link failure: h3's link down at 7 s, back up at 14 s",
+    "delays": [
+      0.05,
+      0.05,
+      0.05
+    ],
+    "threads": 16,
+    "link": {
+      "server": "h3",
+      "at": 7,
+      "up": 14
+    }
+  }
+}

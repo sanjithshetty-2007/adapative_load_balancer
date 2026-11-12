@@ -1,0 +1,450 @@
+{"ev": "controller_start", "mode": "rr", "vip": "10.0.0.100", "servers": [["h1", "10.0.0.1"], ["h2", "10.0.0.2"], ["h3", "10.0.0.3"]], "t": 1794465531.8859}
+{"ev": "switch_up", "dpid": "1", "t": 1794465533.0289}
+{"ev": "load", "server": "h1", "workers": "4", "active": "0", "queued": "0", "svc_ms": "0.0", "avg_ms": "0.0", "rps": "0.0", "served": "0", "t": 1794465533.1665}
+{"ev": "load", "server": "h2", "workers": "4", "active": "0", "queued": "0", "svc_ms": "0.0", "avg_ms": "0.0", "rps": "0.0", "served": "0", "t": 1794465533.1685}
+{"ev": "server_up", "server": "h1", "reason": "load reports received", "t": 1794465533.169}
+{"ev": "server_up", "server": "h2", "reason": "load reports received", "t": 1794465533.1691}
+{"ev": "load", "server": "h3", "workers": "4", "active": "0", "queued": "0", "svc_ms": "0.0", "avg_ms": "0.0", "rps": "0.0", "served": "0", "t": 1794465533.17}
+{"ev": "server_up", "server": "h3", "reason": "load reports received", "t": 1794465533.1704}
+{"ev": "load", "server": "h2", "workers": "4", "active": "0", "queued": "0", "svc_ms": "0.0", "avg_ms": "0.0", "rps": "0.0", "served": "0", "t": 1794465533.6664}
+{"ev": "load", "server": "h3", "workers": "4", "active": "0", "queued": "0", "svc_ms": "0.0", "avg_ms": "0.0", "rps": "0.0", "served": "0", "t": 1794465533.6707}
+{"ev": "load", "server": "h1", "workers": "4", "active": "0", "queued": "0", "svc_ms": "0.0", "avg_ms": "0.0", "rps": "0.0", "served": "0", "t": 1794465533.8651}
+{"ev": "load", "server": "h3", "workers": "4", "active": "0", "queued": "0", "svc_ms": "0.0", "avg_ms": "0.0", "rps": "0.0", "served": "0", "t": 1794465534.2326}
+{"ev": "load", "server": "h2", "workers": "4", "active": "0", "queued": "0", "svc_ms": "0.0", "avg_ms": "0.0", "rps": "0.0", "served": "0", "t": 1794465534.2616}
+{"ev": "load", "server": "h1", "workers": "4", "active": "0", "queued": "0", "svc_ms": "0.0", "avg_ms": "0.0", "rps": "0.0", "served": "0", "t": 1794465534.5382}
+{"ev": "assign", "client": "10.0.0.4", "cport": 52266, "server": "h1", "mode": "rr", "t": 1794465534.6811}
+{"ev": "load", "server": "h3", "workers": "4", "active": "0", "queued": "0", "svc_ms": "0.0", "avg_ms": "0.0", "rps": "0.0", "served": "0", "t": 1794465534.7355}
+{"ev": "load", "server": "h2", "workers": "4", "active": "0", "queued": "0", "svc_ms": "0.0", "avg_ms": "0.0", "rps": "0.0", "served": "0", "t": 1794465534.7636}
+{"ev": "assign", "client": "10.0.0.4", "cport": 52280, "server": "h2", "mode": "rr", "t": 1794465534.7873}
+{"ev": "assign", "client": "10.0.0.4", "cport": 52282, "server": "h3", "mode": "rr", "t": 1794465534.9937}
+{"ev": "load", "server": "h1", "workers": "4", "active": "0", "queued": "0", "svc_ms": "50.6", "avg_ms": "50.8", "rps": "0.5", "served": "1", "t": 1794465535.0762}
+{"ev": "assign", "client": "10.0.0.4", "cport": 52298, "server": "h1", "mode": "rr", "t": 1794465535.0974}
+{"ev": "port_stats", "ports": {"h1": {"to_server_mbps": 0.053, "from_server_mbps": 0.02, "util": 0.005}, "h2": {"to_server_mbps": 0.052, "from_server_mbps": 0.035, "util": 0.005}, "h3": {"to_server_mbps": 0.054, "from_server_mbps": 0.035, "util": 0.005}}, "t": 1794465535.1409}
+{"ev": "state", "servers": [{"name": "h1", "up": true, "overloaded": false, "active": 0, "queued": 0, "svc_ms": 50.6, "avg_ms": 50.8, "util": 0.005, "est": 0.0, "assigned_total": 2}, {"name": "h2", "up": true, "overloaded": false, "active": 0, "queued": 0, "svc_ms": 0.0, "avg_ms": 0.0, "util": 0.005, "est": 0.0, "assigned_total": 1}, {"name": "h3", "up": true, "overloaded": false, "active": 0, "queued": 0, "svc_ms": 0.0, "avg_ms": 0.0, "util": 0.005, "est": 0.0, "assigned_total": 1}], "t": 1794465535.141}
+{"ev": "assign", "client": "10.0.0.4", "cport": 52302, "server": "h2", "mode": "rr", "t": 1794465535.2156}
+{"ev": "load", "server": "h3", "workers": "4", "active": "0", "queued": "0", "svc_ms": "58.3", "avg_ms": "58.4", "rps": "0.5", "served": "1", "t": 1794465535.2401}
+{"ev": "load", "server": "h2", "workers": "4", "active": "0", "queued": "0", "svc_ms": "116.1", "avg_ms": "116.4", "rps": "0.5", "served": "1", "t": 1794465535.2636}
+{"ev": "assign", "client": "10.0.0.4", "cport": 52308, "server": "h3", "mode": "rr", "t": 1794465535.3543}
+{"ev": "assign", "client": "10.0.0.4", "cport": 52316, "server": "h1", "mode": "rr", "t": 1794465535.5566}
+{"ev": "load", "server": "h1", "workers": "4", "active": "0", "queued": "0", "svc_ms": "62.3", "avg_ms": "62.5", "rps": "1.0", "served": "2", "t": 1794465535.5804}
+{"ev": "assign", "client": "10.0.0.4", "cport": 52326, "server": "h2", "mode": "rr", "t": 1794465535.6845}
+{"ev": "load", "server": "h3", "workers": "4", "active": "0", "queued": "0", "svc_ms": "86.8", "avg_ms": "87.3", "rps": "1.0", "served": "2", "t": 1794465535.7418}
+{"ev": "load", "server": "h2", "workers": "4", "active": "1", "queued": "0", "svc_ms": "83.1", "avg_ms": "83.3", "rps": "1.0", "served": "2", "t": 1794465535.7716}
+{"ev": "assign", "client": "10.0.0.4", "cport": 52342, "server": "h3", "mode": "rr", "t": 1794465535.7971}
+{"ev": "assign", "client": "10.0.0.4", "cport": 52352, "server": "h1", "mode": "rr", "t": 1794465536.0143}
+{"ev": "assign", "client": "10.0.0.4", "cport": 52364, "server": "h2", "mode": "rr", "t": 1794465536.0709}
+{"ev": "load", "server": "h1", "workers": "4", "active": "0", "queued": "0", "svc_ms": "62.3", "avg_ms": "62.6", "rps": "2.0", "served": "4", "t": 1794465536.081}
+{"ev": "port_stats", "ports": {"h1": {"to_server_mbps": 0.039, "from_server_mbps": 0.06, "util": 0.006}, "h2": {"to_server_mbps": 0.038, "from_server_mbps": 0.042, "util": 0.004}, "h3": {"to_server_mbps": 0.028, "from_server_mbps": 0.041, "util": 0.004}}, "t": 1794465536.1136}
+{"ev": "state", "servers": [{"name": "h1", "up": true, "overloaded": false, "active": 0, "queued": 0, "svc_ms": 62.3, "avg_ms": 62.6, "util": 0.006, "est": 0.0, "assigned_total": 4}, {"name": "h2", "up": true, "overloaded": false, "active": 1, "queued": 0, "svc_ms": 83.1, "avg_ms": 83.3, "util": 0.004, "est": 1.0, "assigned_total": 4}, {"name": "h3", "up": true, "overloaded": false, "active": 0, "queued": 0, "svc_ms": 86.8, "avg_ms": 87.3, "util": 0.004, "est": 0.0, "assigned_total": 3}], "t": 1794465536.1136}
+{"ev": "assign", "client": "10.0.0.4", "cport": 52376, "server": "h3", "mode": "rr", "t": 1794465536.2151}
+{"ev": "load", "server": "h3", "workers": "4", "active": "0", "queued": "0", "svc_ms": "100.5", "avg_ms": "101.0", "rps": "1.5", "served": "3", "t": 1794465536.2444}
+{"ev": "load", "server": "h2", "workers": "4", "active": "0", "queued": "0", "svc_ms": "79.3", "avg_ms": "79.6", "rps": "2.0", "served": "4", "t": 1794465536.2701}
+{"ev": "assign", "client": "10.0.0.4", "cport": 52384, "server": "h1", "mode": "rr", "t": 1794465536.3802}
+{"ev": "assign", "client": "10.0.0.4", "cport": 52392, "server": "h2", "mode": "rr", "t": 1794465536.5523}
+{"ev": "load", "server": "h1", "workers": "4", "active": "0", "queued": "0", "svc_ms": "69.1", "avg_ms": "69.5", "rps": "2.5", "served": "5", "t": 1794465536.5881}
+{"ev": "assign", "client": "10.0.0.4", "cport": 52408, "server": "h3", "mode": "rr", "t": 1794465536.7699}
+{"ev": "load", "server": "h2", "workers": "4", "active": "0", "queued": "0", "svc_ms": "97.5", "avg_ms": "97.8", "rps": "2.5", "served": "5", "t": 1794465536.7703}
+{"ev": "load", "server": "h3", "workers": "4", "active": "0", "queued": "0", "svc_ms": "94.8", "avg_ms": "95.5", "rps": "2.0", "served": "4", "t": 1794465537.0532}
+{"ev": "load", "server": "h1", "workers": "4", "active": "0", "queued": "0", "svc_ms": "73.8", "avg_ms": "74.1", "rps": "2.0", "served": "5", "t": 1794465537.1136}
+{"ev": "port_stats", "ports": {"h1": {"to_server_mbps": 0.009, "from_server_mbps": 0.021, "util": 0.002}, "h2": {"to_server_mbps": 0.011, "from_server_mbps": 0.039, "util": 0.004}, "h3": {"to_server_mbps": 0.011, "from_server_mbps": 0.022, "util": 0.002}}, "t": 1794465537.1141}
+{"ev": "state", "servers": [{"name": "h1", "up": true, "overloaded": false, "active": 0, "queued": 0, "svc_ms": 73.8, "avg_ms": 74.1, "util": 0.002, "est": 0.0, "assigned_total": 5}, {"name": "h2", "up": true, "overloaded": false, "active": 0, "queued": 0, "svc_ms": 97.5, "avg_ms": 97.8, "util": 0.004, "est": 0.0, "assigned_total": 5}, {"name": "h3", "up": true, "overloaded": false, "active": 0, "queued": 0, "svc_ms": 94.8, "avg_ms": 95.5, "util": 0.002, "est": 0.0, "assigned_total": 5}], "t": 1794465537.1141}
+{"ev": "assign", "client": "10.0.0.4", "cport": 41986, "server": "h1", "mode": "rr", "t": 1794465537.1347}
+{"ev": "load", "server": "h2", "workers": "4", "active": "0", "queued": "0", "svc_ms": "92.8", "avg_ms": "93.1", "rps": "2.0", "served": "5", "t": 1794465537.3001}
+{"ev": "assign", "client": "10.0.0.4", "cport": 41990, "server": "h2", "mode": "rr", "t": 1794465537.3023}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42004, "server": "h3", "mode": "rr", "t": 1794465537.5502}
+{"ev": "load", "server": "h3", "workers": "4", "active": "0", "queued": "0", "svc_ms": "94.7", "avg_ms": "95.4", "rps": "1.5", "served": "5", "t": 1794465537.5585}
+{"ev": "load", "server": "h1", "workers": "4", "active": "0", "queued": "0", "svc_ms": "73.8", "avg_ms": "74.2", "rps": "2.0", "served": "6", "t": 1794465537.6181}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42014, "server": "h1", "mode": "rr", "t": 1794465537.7231}
+{"ev": "load", "server": "h2", "workers": "4", "active": "0", "queued": "0", "svc_ms": "141.4", "avg_ms": "141.7", "rps": "1.5", "served": "6", "t": 1794465537.8579}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42020, "server": "h2", "mode": "rr", "t": 1794465537.859}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42028, "server": "h3", "mode": "rr", "t": 1794465538.063}
+{"ev": "port_stats", "ports": {"h1": {"to_server_mbps": 0.017, "from_server_mbps": 0.039, "util": 0.004}, "h2": {"to_server_mbps": 0.017, "from_server_mbps": 0.04, "util": 0.004}, "h3": {"to_server_mbps": 0.02, "from_server_mbps": 0.039, "util": 0.004}}, "t": 1794465538.115}
+{"ev": "state", "servers": [{"name": "h1", "up": true, "overloaded": false, "active": 0, "queued": 0, "svc_ms": 73.8, "avg_ms": 74.2, "util": 0.004, "est": 0.0, "assigned_total": 7}, {"name": "h2", "up": true, "overloaded": false, "active": 0, "queued": 0, "svc_ms": 141.4, "avg_ms": 141.7, "util": 0.004, "est": 0.0, "assigned_total": 7}, {"name": "h3", "up": true, "overloaded": false, "active": 0, "queued": 0, "svc_ms": 94.7, "avg_ms": 95.4, "util": 0.004, "est": 0.0, "assigned_total": 7}], "t": 1794465538.1151}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42044, "server": "h1", "mode": "rr", "t": 1794465538.196}
+{"ev": "load", "server": "h1", "workers": "4", "active": "0", "queued": "0", "svc_ms": "95.3", "avg_ms": "95.5", "rps": "1.5", "served": "7", "t": 1794465538.2544}
+{"ev": "load", "server": "h3", "workers": "4", "active": "0", "queued": "0", "svc_ms": "91.1", "avg_ms": "91.6", "rps": "2.0", "served": "7", "t": 1794465538.2547}
+{"ev": "load", "server": "h2", "workers": "4", "active": "0", "queued": "0", "svc_ms": "157.1", "avg_ms": "157.5", "rps": "1.5", "served": "7", "t": 1794465538.3852}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42056, "server": "h2", "mode": "rr", "t": 1794465538.3864}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42058, "server": "h3", "mode": "rr", "t": 1794465538.5231}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42074, "server": "h1", "mode": "rr", "t": 1794465538.681}
+{"ev": "load", "server": "h3", "workers": "4", "active": "0", "queued": "0", "svc_ms": "85.9", "avg_ms": "86.1", "rps": "2.0", "served": "8", "t": 1794465538.7558}
+{"ev": "load", "server": "h1", "workers": "4", "active": "0", "queued": "0", "svc_ms": "93.2", "avg_ms": "93.4", "rps": "2.0", "served": "9", "t": 1794465538.8104}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42080, "server": "h2", "mode": "rr", "t": 1794465538.8107}
+{"ev": "load", "server": "h2", "workers": "4", "active": "0", "queued": "0", "svc_ms": "129.8", "avg_ms": "130.0", "rps": "1.5", "served": "8", "t": 1794465538.8862}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42092, "server": "h3", "mode": "rr", "t": 1794465539.0931}
+{"ev": "port_stats", "ports": {"h1": {"to_server_mbps": 0.017, "from_server_mbps": 0.04, "util": 0.004}, "h2": {"to_server_mbps": 0.017, "from_server_mbps": 0.04, "util": 0.004}, "h3": {"to_server_mbps": 0.017, "from_server_mbps": 0.04, "util": 0.004}}, "t": 1794465539.1433}
+{"ev": "state", "servers": [{"name": "h1", "up": true, "overloaded": false, "active": 0, "queued": 0, "svc_ms": 93.2, "avg_ms": 93.4, "util": 0.004, "est": 0.0, "assigned_total": 9}, {"name": "h2", "up": true, "overloaded": false, "active": 0, "queued": 0, "svc_ms": 129.8, "avg_ms": 130.0, "util": 0.004, "est": 0.0, "assigned_total": 9}, {"name": "h3", "up": true, "overloaded": false, "active": 0, "queued": 0, "svc_ms": 85.9, "avg_ms": 86.1, "util": 0.004, "est": 0.0, "assigned_total": 9}], "t": 1794465539.1434}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42106, "server": "h1", "mode": "rr", "t": 1794465539.2303}
+{"ev": "load", "server": "h3", "workers": "4", "active": "0", "queued": "0", "svc_ms": "98.3", "avg_ms": "98.5", "rps": "2.0", "served": "9", "t": 1794465539.2576}
+{"ev": "load", "server": "h1", "workers": "4", "active": "1", "queued": "0", "svc_ms": "99.6", "avg_ms": "99.8", "rps": "1.5", "served": "9", "t": 1794465539.3281}
+{"ev": "load", "server": "h2", "workers": "4", "active": "0", "queued": "0", "svc_ms": "140.6", "avg_ms": "153.2", "rps": "2.0", "served": "9", "t": 1794465539.3871}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42120, "server": "h2", "mode": "rr", "t": 1794465539.413}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42122, "server": "h3", "mode": "rr", "t": 1794465539.4906}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42126, "server": "h1", "mode": "rr", "t": 1794465539.6937}
+{"ev": "load", "server": "h3", "workers": "4", "active": "0", "queued": "0", "svc_ms": "93.9", "avg_ms": "94.1", "rps": "2.0", "served": "10", "t": 1794465539.7622}
+{"ev": "load", "server": "h1", "workers": "4", "active": "1", "queued": "0", "svc_ms": "92.6", "avg_ms": "92.8", "rps": "1.5", "served": "10", "t": 1794465539.8698}
+{"ev": "load", "server": "h2", "workers": "4", "active": "0", "queued": "0", "svc_ms": "120.5", "avg_ms": "133.1", "rps": "2.0", "served": "10", "t": 1794465539.8941}
+{"ev": "port_stats", "ports": {"h1": {"to_server_mbps": 0.011, "from_server_mbps": 0.04, "util": 0.004}, "h2": {"to_server_mbps": 0.008, "from_server_mbps": 0.022, "util": 0.002}, "h3": {"to_server_mbps": 0.009, "from_server_mbps": 0.039, "util": 0.004}}, "t": 1794465540.2111}
+{"ev": "state", "servers": [{"name": "h1", "up": true, "overloaded": false, "active": 1, "queued": 0, "svc_ms": 92.6, "avg_ms": 92.8, "util": 0.004, "est": 1.0, "assigned_total": 11}, {"name": "h2", "up": true, "overloaded": false, "active": 0, "queued": 0, "svc_ms": 120.5, "avg_ms": 133.1, "util": 0.002, "est": 0.0, "assigned_total": 10}, {"name": "h3", "up": true, "overloaded": false, "active": 0, "queued": 0, "svc_ms": 93.9, "avg_ms": 94.1, "util": 0.004, "est": 0.0, "assigned_total": 10}], "t": 1794465540.2112}
+{"ev": "load", "server": "h3", "workers": "4", "active": "0", "queued": "0", "svc_ms": "95.5", "avg_ms": "95.7", "rps": "1.5", "served": "10", "t": 1794465540.2629}
+{"ev": "load", "server": "h3", "workers": "4", "active": "0", "queued": "0", "svc_ms": "114.8", "avg_ms": "115.0", "rps": "1.0", "served": "10", "t": 1794465540.7638}
+{"ev": "load", "server": "h1", "workers": "4", "active": "0", "queued": "0", "svc_ms": "85.9", "avg_ms": "86.1", "rps": "1.5", "served": "11", "t": 1794465540.7649}
+{"ev": "load", "server": "h2", "workers": "4", "active": "0", "queued": "0", "svc_ms": "123.3", "avg_ms": "148.4", "rps": "1.0", "served": "10", "t": 1794465540.8252}
+{"ev": "assign", "client": "10.0.0.7", "cport": 40686, "server": "h2", "mode": "rr", "t": 1794465541.2345}
+{"ev": "assign", "client": "10.0.0.7", "cport": 40690, "server": "h3", "mode": "rr", "t": 1794465541.235}
+{"ev": "assign", "client": "10.0.0.7", "cport": 40694, "server": "h1", "mode": "rr", "t": 1794465541.2352}
+{"ev": "assign", "client": "10.0.0.7", "cport": 40696, "server": "h2", "mode": "rr", "t": 1794465541.2361}
+{"ev": "port_stats", "ports": {"h1": {"to_server_mbps": 0.001, "from_server_mbps": 0.001, "util": 0.0}, "h2": {"to_server_mbps": 0.001, "from_server_mbps": 0.001, "util": 0.0}, "h3": {"to_server_mbps": 0.001, "from_server_mbps": 0.002, "util": 0.0}}, "t": 1794465541.2362}
+{"ev": "state", "servers": [{"name": "h1", "up": true, "overloaded": false, "active": 0, "queued": 0, "svc_ms": 85.9, "avg_ms": 86.1, "util": 0.0, "est": 0.0, "assigned_total": 12}, {"name": "h2", "up": true, "overloaded": false, "active": 0, "queued": 0, "svc_ms": 123.3, "avg_ms": 148.4, "util": 0.0, "est": 0.0, "assigned_total": 12}, {"name": "h3", "up": true, "overloaded": false, "active": 0, "queued": 0, "svc_ms": 114.8, "avg_ms": 115.0, "util": 0.0, "est": 0.0, "assigned_total": 11}], "t": 1794465541.2363}
+{"ev": "assign", "client": "10.0.0.7", "cport": 40698, "server": "h3", "mode": "rr", "t": 1794465541.2363}
+{"ev": "assign", "client": "10.0.0.7", "cport": 40710, "server": "h1", "mode": "rr", "t": 1794465541.2365}
+{"ev": "assign", "client": "10.0.0.7", "cport": 40716, "server": "h2", "mode": "rr", "t": 1794465541.2371}
+{"ev": "assign", "client": "10.0.0.7", "cport": 40720, "server": "h3", "mode": "rr", "t": 1794465541.2478}
+{"ev": "assign", "client": "10.0.0.5", "cport": 41354, "server": "h1", "mode": "rr", "t": 1794465541.249}
+{"ev": "assign", "client": "10.0.0.5", "cport": 41358, "server": "h2", "mode": "rr", "t": 1794465541.2493}
+{"ev": "assign", "client": "10.0.0.5", "cport": 41312, "server": "h3", "mode": "rr", "t": 1794465541.2495}
+{"ev": "assign", "client": "10.0.0.5", "cport": 41314, "server": "h1", "mode": "rr", "t": 1794465541.2497}
+{"ev": "assign", "client": "10.0.0.5", "cport": 41330, "server": "h2", "mode": "rr", "t": 1794465541.2498}
+{"ev": "assign", "client": "10.0.0.5", "cport": 41334, "server": "h3", "mode": "rr", "t": 1794465541.2501}
+{"ev": "assign", "client": "10.0.0.5", "cport": 41342, "server": "h1", "mode": "rr", "t": 1794465541.2502}
+{"ev": "assign", "client": "10.0.0.5", "cport": 41362, "server": "h2", "mode": "rr", "t": 1794465541.2504}
+{"ev": "assign", "client": "10.0.0.6", "cport": 57308, "server": "h3", "mode": "rr", "t": 1794465541.2631}
+{"ev": "assign", "client": "10.0.0.6", "cport": 57310, "server": "h1", "mode": "rr", "t": 1794465541.2634}
+{"ev": "assign", "client": "10.0.0.6", "cport": 57320, "server": "h2", "mode": "rr", "t": 1794465541.2635}
+{"ev": "assign", "client": "10.0.0.6", "cport": 57326, "server": "h3", "mode": "rr", "t": 1794465541.2637}
+{"ev": "assign", "client": "10.0.0.6", "cport": 57328, "server": "h1", "mode": "rr", "t": 1794465541.2642}
+{"ev": "assign", "client": "10.0.0.6", "cport": 57344, "server": "h2", "mode": "rr", "t": 1794465541.2644}
+{"ev": "assign", "client": "10.0.0.6", "cport": 57346, "server": "h3", "mode": "rr", "t": 1794465541.2646}
+{"ev": "assign", "client": "10.0.0.6", "cport": 57354, "server": "h1", "mode": "rr", "t": 1794465541.2648}
+{"ev": "load", "server": "h3", "workers": "4", "active": "5", "queued": "1", "svc_ms": "101.7", "avg_ms": "101.9", "rps": "0.5", "served": "10", "t": 1794465541.2651}
+{"ev": "load", "server": "h1", "workers": "4", "active": "5", "queued": "1", "svc_ms": "89.3", "avg_ms": "89.5", "rps": "1.0", "served": "11", "t": 1794465541.2654}
+{"ev": "assign", "client": "10.0.0.7", "cport": 40722, "server": "h2", "mode": "rr", "t": 1794465541.2919}
+{"ev": "assign", "client": "10.0.0.7", "cport": 40730, "server": "h3", "mode": "rr", "t": 1794465541.2923}
+{"ev": "assign", "client": "10.0.0.7", "cport": 40742, "server": "h1", "mode": "rr", "t": 1794465541.2987}
+{"ev": "assign", "client": "10.0.0.7", "cport": 40750, "server": "h2", "mode": "rr", "t": 1794465541.3056}
+{"ev": "assign", "client": "10.0.0.5", "cport": 41372, "server": "h3", "mode": "rr", "t": 1794465541.306}
+{"ev": "assign", "client": "10.0.0.5", "cport": 41386, "server": "h1", "mode": "rr", "t": 1794465541.3064}
+{"ev": "assign", "client": "10.0.0.7", "cport": 40762, "server": "h2", "mode": "rr", "t": 1794465541.3136}
+{"ev": "assign", "client": "10.0.0.7", "cport": 40766, "server": "h3", "mode": "rr", "t": 1794465541.3143}
+{"ev": "assign", "client": "10.0.0.5", "cport": 41402, "server": "h1", "mode": "rr", "t": 1794465541.3145}
+{"ev": "load", "server": "h2", "workers": "4", "active": "9", "queued": "5", "svc_ms": "58.9", "avg_ms": "59.1", "rps": "1.5", "served": "12", "t": 1794465541.3257}
+{"ev": "assign", "client": "10.0.0.7", "cport": 40774, "server": "h2", "mode": "rr", "t": 1794465541.3387}
+{"ev": "assign", "client": "10.0.0.7", "cport": 40782, "server": "h3", "mode": "rr", "t": 1794465541.3392}
+{"ev": "assign", "client": "10.0.0.5", "cport": 41418, "server": "h1", "mode": "rr", "t": 1794465541.3401}
+{"ev": "assign", "client": "10.0.0.5", "cport": 41422, "server": "h2", "mode": "rr", "t": 1794465541.3467}
+{"ev": "assign", "client": "10.0.0.5", "cport": 41430, "server": "h3", "mode": "rr", "t": 1794465541.3469}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42132, "server": "h1", "mode": "rr", "t": 1794465541.3491}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42138, "server": "h2", "mode": "rr", "t": 1794465541.3493}
+{"ev": "assign", "client": "10.0.0.5", "cport": 41434, "server": "h3", "mode": "rr", "t": 1794465541.3578}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42144, "server": "h1", "mode": "rr", "t": 1794465541.3579}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42160, "server": "h2", "mode": "rr", "t": 1794465541.3945}
+{"ev": "assign", "client": "10.0.0.6", "cport": 57362, "server": "h3", "mode": "rr", "t": 1794465541.3962}
+{"ev": "assign", "client": "10.0.0.6", "cport": 57370, "server": "h1", "mode": "rr", "t": 1794465541.3964}
+{"ev": "assign", "client": "10.0.0.6", "cport": 57372, "server": "h2", "mode": "rr", "t": 1794465541.3966}
+{"ev": "assign", "client": "10.0.0.6", "cport": 57368, "server": "h3", "mode": "rr", "t": 1794465541.3967}
+{"ev": "assign", "client": "10.0.0.5", "cport": 41450, "server": "h1", "mode": "rr", "t": 1794465541.3969}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42176, "server": "h2", "mode": "rr", "t": 1794465541.3975}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42188, "server": "h3", "mode": "rr", "t": 1794465541.3977}
+{"ev": "assign", "client": "10.0.0.6", "cport": 57378, "server": "h1", "mode": "rr", "t": 1794465541.3988}
+{"ev": "assign", "client": "10.0.0.6", "cport": 57394, "server": "h2", "mode": "rr", "t": 1794465541.3991}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42186, "server": "h3", "mode": "rr", "t": 1794465541.3994}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42194, "server": "h1", "mode": "rr", "t": 1794465541.3998}
+{"ev": "assign", "client": "10.0.0.6", "cport": 57408, "server": "h2", "mode": "rr", "t": 1794465541.4003}
+{"ev": "assign", "client": "10.0.0.7", "cport": 40790, "server": "h3", "mode": "rr", "t": 1794465541.4005}
+{"ev": "assign", "client": "10.0.0.6", "cport": 57416, "server": "h1", "mode": "rr", "t": 1794465541.4007}
+{"ev": "assign", "client": "10.0.0.7", "cport": 40800, "server": "h2", "mode": "rr", "t": 1794465541.4017}
+{"ev": "assign", "client": "10.0.0.7", "cport": 40810, "server": "h3", "mode": "rr", "t": 1794465541.4338}
+{"ev": "assign", "client": "10.0.0.7", "cport": 40820, "server": "h1", "mode": "rr", "t": 1794465541.4505}
+{"ev": "assign", "client": "10.0.0.5", "cport": 41460, "server": "h2", "mode": "rr", "t": 1794465541.5067}
+{"ev": "assign", "client": "10.0.0.7", "cport": 40830, "server": "h3", "mode": "rr", "t": 1794465541.508}
+{"ev": "assign", "client": "10.0.0.5", "cport": 41488, "server": "h1", "mode": "rr", "t": 1794465541.5096}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42210, "server": "h2", "mode": "rr", "t": 1794465541.5104}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42216, "server": "h3", "mode": "rr", "t": 1794465541.5164}
+{"ev": "assign", "client": "10.0.0.7", "cport": 40850, "server": "h1", "mode": "rr", "t": 1794465541.5166}
+{"ev": "assign", "client": "10.0.0.5", "cport": 41472, "server": "h2", "mode": "rr", "t": 1794465541.5167}
+{"ev": "assign", "client": "10.0.0.5", "cport": 41510, "server": "h3", "mode": "rr", "t": 1794465541.5168}
+{"ev": "assign", "client": "10.0.0.7", "cport": 40838, "server": "h1", "mode": "rr", "t": 1794465541.5191}
+{"ev": "assign", "client": "10.0.0.5", "cport": 41504, "server": "h2", "mode": "rr", "t": 1794465541.5192}
+{"ev": "assign", "client": "10.0.0.7", "cport": 40852, "server": "h3", "mode": "rr", "t": 1794465541.5193}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42230, "server": "h1", "mode": "rr", "t": 1794465541.5238}
+{"ev": "assign", "client": "10.0.0.5", "cport": 41520, "server": "h2", "mode": "rr", "t": 1794465541.5249}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42234, "server": "h3", "mode": "rr", "t": 1794465541.5275}
+{"ev": "assign", "client": "10.0.0.6", "cport": 57420, "server": "h1", "mode": "rr", "t": 1794465541.5277}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42248, "server": "h2", "mode": "rr", "t": 1794465541.528}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42260, "server": "h3", "mode": "rr", "t": 1794465541.5293}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42276, "server": "h1", "mode": "rr", "t": 1794465541.5295}
+{"ev": "assign", "client": "10.0.0.6", "cport": 57424, "server": "h2", "mode": "rr", "t": 1794465541.5315}
+{"ev": "assign", "client": "10.0.0.5", "cport": 41522, "server": "h3", "mode": "rr", "t": 1794465541.5341}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42282, "server": "h1", "mode": "rr", "t": 1794465541.5403}
+{"ev": "assign", "client": "10.0.0.6", "cport": 57428, "server": "h2", "mode": "rr", "t": 1794465541.552}
+{"ev": "assign", "client": "10.0.0.7", "cport": 40868, "server": "h3", "mode": "rr", "t": 1794465541.5713}
+{"ev": "assign", "client": "10.0.0.6", "cport": 57440, "server": "h1", "mode": "rr", "t": 1794465541.574}
+{"ev": "assign", "client": "10.0.0.6", "cport": 57450, "server": "h2", "mode": "rr", "t": 1794465541.5742}
+{"ev": "assign", "client": "10.0.0.6", "cport": 57464, "server": "h3", "mode": "rr", "t": 1794465541.5744}
+{"ev": "assign", "client": "10.0.0.5", "cport": 41526, "server": "h1", "mode": "rr", "t": 1794465541.5745}
+{"ev": "assign", "client": "10.0.0.7", "cport": 40880, "server": "h2", "mode": "rr", "t": 1794465541.5751}
+{"ev": "assign", "client": "10.0.0.6", "cport": 57470, "server": "h3", "mode": "rr", "t": 1794465541.5753}
+{"ev": "assign", "client": "10.0.0.6", "cport": 57480, "server": "h1", "mode": "rr", "t": 1794465541.5793}
+{"ev": "assign", "client": "10.0.0.7", "cport": 40882, "server": "h2", "mode": "rr", "t": 1794465541.5836}
+{"ev": "assign", "client": "10.0.0.7", "cport": 40898, "server": "h3", "mode": "rr", "t": 1794465541.5851}
+{"ev": "assign", "client": "10.0.0.7", "cport": 40904, "server": "h1", "mode": "rr", "t": 1794465541.5867}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42284, "server": "h2", "mode": "rr", "t": 1794465541.6026}
+{"ev": "assign", "client": "10.0.0.7", "cport": 40906, "server": "h3", "mode": "rr", "t": 1794465541.6114}
+{"ev": "assign", "client": "10.0.0.7", "cport": 40908, "server": "h1", "mode": "rr", "t": 1794465541.6347}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42290, "server": "h2", "mode": "rr", "t": 1794465541.6358}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42292, "server": "h3", "mode": "rr", "t": 1794465541.6362}
+{"ev": "assign", "client": "10.0.0.5", "cport": 41532, "server": "h1", "mode": "rr", "t": 1794465541.6373}
+{"ev": "assign", "client": "10.0.0.5", "cport": 41552, "server": "h2", "mode": "rr", "t": 1794465541.6374}
+{"ev": "assign", "client": "10.0.0.6", "cport": 57496, "server": "h3", "mode": "rr", "t": 1794465541.6377}
+{"ev": "assign", "client": "10.0.0.5", "cport": 41564, "server": "h1", "mode": "rr", "t": 1794465541.6406}
+{"ev": "assign", "client": "10.0.0.5", "cport": 41544, "server": "h2", "mode": "rr", "t": 1794465541.6408}
+{"ev": "assign", "client": "10.0.0.7", "cport": 40922, "server": "h3", "mode": "rr", "t": 1794465541.6412}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42300, "server": "h1", "mode": "rr", "t": 1794465541.6414}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42320, "server": "h2", "mode": "rr", "t": 1794465541.6728}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42332, "server": "h3", "mode": "rr", "t": 1794465541.6732}
+{"ev": "assign", "client": "10.0.0.7", "cport": 40938, "server": "h1", "mode": "rr", "t": 1794465541.6734}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42304, "server": "h2", "mode": "rr", "t": 1794465541.6735}
+{"ev": "assign", "client": "10.0.0.5", "cport": 41576, "server": "h3", "mode": "rr", "t": 1794465541.6772}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42344, "server": "h1", "mode": "rr", "t": 1794465541.6797}
+{"ev": "assign", "client": "10.0.0.6", "cport": 57528, "server": "h2", "mode": "rr", "t": 1794465541.6847}
+{"ev": "assign", "client": "10.0.0.6", "cport": 57512, "server": "h3", "mode": "rr", "t": 1794465541.6867}
+{"ev": "assign", "client": "10.0.0.6", "cport": 57544, "server": "h1", "mode": "rr", "t": 1794465541.6918}
+{"ev": "assign", "client": "10.0.0.6", "cport": 57554, "server": "h2", "mode": "rr", "t": 1794465541.7023}
+{"ev": "assign", "client": "10.0.0.5", "cport": 41594, "server": "h3", "mode": "rr", "t": 1794465541.7029}
+{"ev": "assign", "client": "10.0.0.5", "cport": 41584, "server": "h1", "mode": "rr", "t": 1794465541.7032}
+{"ev": "assign", "client": "10.0.0.5", "cport": 41596, "server": "h2", "mode": "rr", "t": 1794465541.7196}
+{"ev": "assign", "client": "10.0.0.7", "cport": 40942, "server": "h3", "mode": "rr", "t": 1794465541.7326}
+{"ev": "assign", "client": "10.0.0.7", "cport": 40948, "server": "h1", "mode": "rr", "t": 1794465541.745}
+{"ev": "assign", "client": "10.0.0.6", "cport": 57570, "server": "h2", "mode": "rr", "t": 1794465541.7452}
+{"ev": "assign", "client": "10.0.0.7", "cport": 40950, "server": "h3", "mode": "rr", "t": 1794465541.7454}
+{"ev": "assign", "client": "10.0.0.7", "cport": 40952, "server": "h1", "mode": "rr", "t": 1794465541.75}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42360, "server": "h2", "mode": "rr", "t": 1794465541.7502}
+{"ev": "assign", "client": "10.0.0.6", "cport": 57562, "server": "h3", "mode": "rr", "t": 1794465541.7504}
+{"ev": "assign", "client": "10.0.0.7", "cport": 40956, "server": "h1", "mode": "rr", "t": 1794465541.7505}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42362, "server": "h2", "mode": "rr", "t": 1794465541.7506}
+{"ev": "assign", "client": "10.0.0.5", "cport": 41610, "server": "h3", "mode": "rr", "t": 1794465541.7511}
+{"ev": "assign", "client": "10.0.0.6", "cport": 57586, "server": "h1", "mode": "rr", "t": 1794465541.7513}
+{"ev": "load", "server": "h1", "workers": "4", "active": "11", "queued": "7", "svc_ms": "56.0", "avg_ms": "85.2", "rps": "16.5", "served": "43", "t": 1794465541.7678}
+{"ev": "load", "server": "h3", "workers": "4", "active": "9", "queued": "5", "svc_ms": "54.9", "avg_ms": "91.1", "rps": "16.5", "served": "43", "t": 1794465541.7681}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42376, "server": "h2", "mode": "rr", "t": 1794465541.7699}
+{"ev": "assign", "client": "10.0.0.6", "cport": 57594, "server": "h3", "mode": "rr", "t": 1794465541.7781}
+{"ev": "assign", "client": "10.0.0.7", "cport": 40958, "server": "h1", "mode": "rr", "t": 1794465541.7812}
+{"ev": "assign", "client": "10.0.0.5", "cport": 41618, "server": "h2", "mode": "rr", "t": 1794465541.8039}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42390, "server": "h3", "mode": "rr", "t": 1794465541.8168}
+{"ev": "assign", "client": "10.0.0.5", "cport": 41630, "server": "h1", "mode": "rr", "t": 1794465541.817}
+{"ev": "assign", "client": "10.0.0.7", "cport": 40974, "server": "h2", "mode": "rr", "t": 1794465541.8209}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42402, "server": "h3", "mode": "rr", "t": 1794465541.8227}
+{"ev": "assign", "client": "10.0.0.5", "cport": 41650, "server": "h1", "mode": "rr", "t": 1794465541.8237}
+{"ev": "assign", "client": "10.0.0.5", "cport": 41658, "server": "h2", "mode": "rr", "t": 1794465541.8239}
+{"ev": "assign", "client": "10.0.0.5", "cport": 41634, "server": "h3", "mode": "rr", "t": 1794465541.8243}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42418, "server": "h1", "mode": "rr", "t": 1794465541.8245}
+{"ev": "load", "server": "h2", "workers": "4", "active": "8", "queued": "4", "svc_ms": "54.6", "avg_ms": "102.1", "rps": "18.0", "served": "46", "t": 1794465541.8261}
+{"ev": "assign", "client": "10.0.0.7", "cport": 40982, "server": "h2", "mode": "rr", "t": 1794465541.8292}
+{"ev": "assign", "client": "10.0.0.6", "cport": 57602, "server": "h3", "mode": "rr", "t": 1794465541.8504}
+{"ev": "assign", "client": "10.0.0.5", "cport": 41674, "server": "h1", "mode": "rr", "t": 1794465541.8544}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42424, "server": "h2", "mode": "rr", "t": 1794465541.8669}
+{"ev": "assign", "client": "10.0.0.7", "cport": 40988, "server": "h3", "mode": "rr", "t": 1794465541.8679}
+{"ev": "assign", "client": "10.0.0.6", "cport": 57604, "server": "h1", "mode": "rr", "t": 1794465541.8681}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42428, "server": "h2", "mode": "rr", "t": 1794465541.8682}
+{"ev": "assign", "client": "10.0.0.7", "cport": 41002, "server": "h3", "mode": "rr", "t": 1794465541.9105}
+{"ev": "assign", "client": "10.0.0.6", "cport": 57612, "server": "h1", "mode": "rr", "t": 1794465541.9107}
+{"ev": "assign", "client": "10.0.0.5", "cport": 41678, "server": "h2", "mode": "rr", "t": 1794465541.9109}
+{"ev": "assign", "client": "10.0.0.6", "cport": 57628, "server": "h3", "mode": "rr", "t": 1794465541.9111}
+{"ev": "assign", "client": "10.0.0.5", "cport": 41688, "server": "h1", "mode": "rr", "t": 1794465541.9112}
+{"ev": "assign", "client": "10.0.0.6", "cport": 57636, "server": "h2", "mode": "rr", "t": 1794465541.9127}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42444, "server": "h3", "mode": "rr", "t": 1794465541.916}
+{"ev": "assign", "client": "10.0.0.6", "cport": 57648, "server": "h1", "mode": "rr", "t": 1794465541.9172}
+{"ev": "assign", "client": "10.0.0.6", "cport": 57662, "server": "h2", "mode": "rr", "t": 1794465541.9259}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42450, "server": "h3", "mode": "rr", "t": 1794465541.9428}
+{"ev": "assign", "client": "10.0.0.7", "cport": 41014, "server": "h1", "mode": "rr", "t": 1794465541.9475}
+{"ev": "assign", "client": "10.0.0.6", "cport": 57664, "server": "h2", "mode": "rr", "t": 1794465541.9477}
+{"ev": "assign", "client": "10.0.0.7", "cport": 41026, "server": "h3", "mode": "rr", "t": 1794465541.9478}
+{"ev": "assign", "client": "10.0.0.5", "cport": 41700, "server": "h1", "mode": "rr", "t": 1794465541.9479}
+{"ev": "assign", "client": "10.0.0.7", "cport": 41042, "server": "h2", "mode": "rr", "t": 1794465541.954}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42464, "server": "h3", "mode": "rr", "t": 1794465541.9715}
+{"ev": "assign", "client": "10.0.0.7", "cport": 41046, "server": "h1", "mode": "rr", "t": 1794465541.9718}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42472, "server": "h2", "mode": "rr", "t": 1794465541.9732}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42466, "server": "h3", "mode": "rr", "t": 1794465541.9733}
+{"ev": "assign", "client": "10.0.0.5", "cport": 41716, "server": "h1", "mode": "rr", "t": 1794465541.9735}
+{"ev": "assign", "client": "10.0.0.5", "cport": 41726, "server": "h2", "mode": "rr", "t": 1794465541.9736}
+{"ev": "assign", "client": "10.0.0.6", "cport": 57666, "server": "h3", "mode": "rr", "t": 1794465541.9912}
+{"ev": "assign", "client": "10.0.0.6", "cport": 57674, "server": "h1", "mode": "rr", "t": 1794465541.9913}
+{"ev": "assign", "client": "10.0.0.5", "cport": 41736, "server": "h2", "mode": "rr", "t": 1794465541.9914}
+{"ev": "assign", "client": "10.0.0.6", "cport": 57682, "server": "h3", "mode": "rr", "t": 1794465542.0147}
+{"ev": "assign", "client": "10.0.0.5", "cport": 41746, "server": "h1", "mode": "rr", "t": 1794465542.0158}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42474, "server": "h2", "mode": "rr", "t": 1794465542.0175}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42476, "server": "h3", "mode": "rr", "t": 1794465542.0182}
+{"ev": "assign", "client": "10.0.0.5", "cport": 41760, "server": "h1", "mode": "rr", "t": 1794465542.0183}
+{"ev": "assign", "client": "10.0.0.7", "cport": 41050, "server": "h2", "mode": "rr", "t": 1794465542.0267}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42480, "server": "h3", "mode": "rr", "t": 1794465542.0276}
+{"ev": "assign", "client": "10.0.0.7", "cport": 41054, "server": "h1", "mode": "rr", "t": 1794465542.0278}
+{"ev": "assign", "client": "10.0.0.6", "cport": 57696, "server": "h2", "mode": "rr", "t": 1794465542.0283}
+{"ev": "assign", "client": "10.0.0.7", "cport": 41060, "server": "h3", "mode": "rr", "t": 1794465542.0285}
+{"ev": "assign", "client": "10.0.0.6", "cport": 57706, "server": "h1", "mode": "rr", "t": 1794465542.0306}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42492, "server": "h2", "mode": "rr", "t": 1794465542.047}
+{"ev": "assign", "client": "10.0.0.5", "cport": 41770, "server": "h3", "mode": "rr", "t": 1794465542.0543}
+{"ev": "assign", "client": "10.0.0.7", "cport": 41064, "server": "h1", "mode": "rr", "t": 1794465542.0545}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42496, "server": "h2", "mode": "rr", "t": 1794465542.0549}
+{"ev": "assign", "client": "10.0.0.5", "cport": 41776, "server": "h3", "mode": "rr", "t": 1794465542.0604}
+{"ev": "assign", "client": "10.0.0.5", "cport": 41790, "server": "h1", "mode": "rr", "t": 1794465542.0742}
+{"ev": "assign", "client": "10.0.0.7", "cport": 41080, "server": "h2", "mode": "rr", "t": 1794465542.0751}
+{"ev": "assign", "client": "10.0.0.7", "cport": 41084, "server": "h3", "mode": "rr", "t": 1794465542.0754}
+{"ev": "assign", "client": "10.0.0.6", "cport": 57716, "server": "h1", "mode": "rr", "t": 1794465542.0967}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42506, "server": "h2", "mode": "rr", "t": 1794465542.0977}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42520, "server": "h3", "mode": "rr", "t": 1794465542.0999}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42526, "server": "h1", "mode": "rr", "t": 1794465542.1337}
+{"ev": "assign", "client": "10.0.0.7", "cport": 41096, "server": "h2", "mode": "rr", "t": 1794465542.1348}
+{"ev": "assign", "client": "10.0.0.6", "cport": 57726, "server": "h3", "mode": "rr", "t": 1794465542.1378}
+{"ev": "assign", "client": "10.0.0.6", "cport": 57736, "server": "h1", "mode": "rr", "t": 1794465542.1388}
+{"ev": "assign", "client": "10.0.0.6", "cport": 57744, "server": "h2", "mode": "rr", "t": 1794465542.1399}
+{"ev": "assign", "client": "10.0.0.6", "cport": 57760, "server": "h3", "mode": "rr", "t": 1794465542.1402}
+{"ev": "assign", "client": "10.0.0.6", "cport": 57776, "server": "h1", "mode": "rr", "t": 1794465542.1424}
+{"ev": "assign", "client": "10.0.0.7", "cport": 41112, "server": "h2", "mode": "rr", "t": 1794465542.1427}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42530, "server": "h3", "mode": "rr", "t": 1794465542.1434}
+{"ev": "assign", "client": "10.0.0.7", "cport": 41106, "server": "h1", "mode": "rr", "t": 1794465542.1449}
+{"ev": "assign", "client": "10.0.0.7", "cport": 41114, "server": "h2", "mode": "rr", "t": 1794465542.1452}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42536, "server": "h3", "mode": "rr", "t": 1794465542.1454}
+{"ev": "assign", "client": "10.0.0.6", "cport": 57792, "server": "h1", "mode": "rr", "t": 1794465542.1456}
+{"ev": "assign", "client": "10.0.0.7", "cport": 41128, "server": "h2", "mode": "rr", "t": 1794465542.1685}
+{"ev": "assign", "client": "10.0.0.7", "cport": 41130, "server": "h3", "mode": "rr", "t": 1794465542.1687}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42544, "server": "h1", "mode": "rr", "t": 1794465542.1729}
+{"ev": "assign", "client": "10.0.0.5", "cport": 41792, "server": "h2", "mode": "rr", "t": 1794465542.1735}
+{"ev": "assign", "client": "10.0.0.5", "cport": 41800, "server": "h3", "mode": "rr", "t": 1794465542.1736}
+{"ev": "assign", "client": "10.0.0.5", "cport": 41808, "server": "h1", "mode": "rr", "t": 1794465542.1885}
+{"ev": "assign", "client": "10.0.0.7", "cport": 41136, "server": "h2", "mode": "rr", "t": 1794465542.1886}
+{"ev": "assign", "client": "10.0.0.5", "cport": 41822, "server": "h3", "mode": "rr", "t": 1794465542.1894}
+{"ev": "assign", "client": "10.0.0.5", "cport": 41828, "server": "h1", "mode": "rr", "t": 1794465542.1897}
+{"ev": "assign", "client": "10.0.0.7", "cport": 41144, "server": "h2", "mode": "rr", "t": 1794465542.1972}
+{"ev": "assign", "client": "10.0.0.5", "cport": 41834, "server": "h3", "mode": "rr", "t": 1794465542.2106}
+{"ev": "assign", "client": "10.0.0.6", "cport": 57796, "server": "h1", "mode": "rr", "t": 1794465542.2109}
+{"ev": "assign", "client": "10.0.0.6", "cport": 57812, "server": "h2", "mode": "rr", "t": 1794465542.2114}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42558, "server": "h3", "mode": "rr", "t": 1794465542.2327}
+{"ev": "assign", "client": "10.0.0.7", "cport": 41166, "server": "h1", "mode": "rr", "t": 1794465542.2375}
+{"ev": "assign", "client": "10.0.0.7", "cport": 41154, "server": "h2", "mode": "rr", "t": 1794465542.2376}
+{"ev": "assign", "client": "10.0.0.6", "cport": 57822, "server": "h3", "mode": "rr", "t": 1794465542.2378}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42564, "server": "h1", "mode": "rr", "t": 1794465542.25}
+{"ev": "assign", "client": "10.0.0.5", "cport": 41840, "server": "h2", "mode": "rr", "t": 1794465542.2503}
+{"ev": "assign", "client": "10.0.0.5", "cport": 41854, "server": "h3", "mode": "rr", "t": 1794465542.2505}
+{"ev": "assign", "client": "10.0.0.6", "cport": 57836, "server": "h1", "mode": "rr", "t": 1794465542.2506}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42570, "server": "h2", "mode": "rr", "t": 1794465542.2513}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42578, "server": "h3", "mode": "rr", "t": 1794465542.2514}
+{"ev": "port_stats", "ports": {"h1": {"to_server_mbps": 0.227, "from_server_mbps": 1.237, "util": 0.124}, "h2": {"to_server_mbps": 0.228, "from_server_mbps": 1.219, "util": 0.122}, "h3": {"to_server_mbps": 0.225, "from_server_mbps": 1.268, "util": 0.127}}, "t": 1794465542.2516}
+{"ev": "state", "servers": [{"name": "h1", "up": true, "overloaded": false, "active": 11, "queued": 7, "svc_ms": 56.0, "avg_ms": 85.2, "util": 0.124, "est": 11.0, "assigned_total": 87}, {"name": "h2", "up": true, "overloaded": false, "active": 8, "queued": 4, "svc_ms": 54.6, "avg_ms": 102.1, "util": 0.122, "est": 8.0, "assigned_total": 87}, {"name": "h3", "up": true, "overloaded": false, "active": 9, "queued": 5, "svc_ms": 54.9, "avg_ms": 91.1, "util": 0.127, "est": 9.0, "assigned_total": 87}], "t": 1794465542.2516}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42582, "server": "h1", "mode": "rr", "t": 1794465542.2536}
+{"ev": "load", "server": "h3", "workers": "4", "active": "5", "queued": "1", "svc_ms": "53.4", "avg_ms": "88.0", "rps": "34.5", "served": "79", "t": 1794465542.2648}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42586, "server": "h2", "mode": "rr", "t": 1794465542.2663}
+{"ev": "load", "server": "h1", "workers": "4", "active": "9", "queued": "5", "svc_ms": "54.0", "avg_ms": "95.9", "rps": "33.0", "served": "77", "t": 1794465542.2671}
+{"ev": "assign", "client": "10.0.0.6", "cport": 57852, "server": "h3", "mode": "rr", "t": 1794465542.2761}
+{"ev": "assign", "client": "10.0.0.7", "cport": 41168, "server": "h1", "mode": "rr", "t": 1794465542.2946}
+{"ev": "load", "server": "h2", "workers": "4", "active": "8", "queued": "3", "svc_ms": "55.2", "avg_ms": "112.2", "rps": "34.0", "served": "78", "t": 1794465542.3333}
+{"ev": "assign", "client": "10.0.0.6", "cport": 57870, "server": "h2", "mode": "rr", "t": 1794465542.3374}
+{"ev": "assign", "client": "10.0.0.6", "cport": 57862, "server": "h3", "mode": "rr", "t": 1794465542.3379}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42590, "server": "h1", "mode": "rr", "t": 1794465542.3382}
+{"ev": "assign", "client": "10.0.0.5", "cport": 41866, "server": "h2", "mode": "rr", "t": 1794465542.3384}
+{"ev": "assign", "client": "10.0.0.5", "cport": 41878, "server": "h3", "mode": "rr", "t": 1794465542.3385}
+{"ev": "assign", "client": "10.0.0.5", "cport": 41888, "server": "h1", "mode": "rr", "t": 1794465542.3386}
+{"ev": "assign", "client": "10.0.0.5", "cport": 41896, "server": "h2", "mode": "rr", "t": 1794465542.3387}
+{"ev": "assign", "client": "10.0.0.6", "cport": 57876, "server": "h3", "mode": "rr", "t": 1794465542.339}
+{"ev": "assign", "client": "10.0.0.7", "cport": 41170, "server": "h1", "mode": "rr", "t": 1794465542.3394}
+{"ev": "assign", "client": "10.0.0.7", "cport": 41186, "server": "h2", "mode": "rr", "t": 1794465542.3397}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42604, "server": "h3", "mode": "rr", "t": 1794465542.3401}
+{"ev": "assign", "client": "10.0.0.5", "cport": 41904, "server": "h1", "mode": "rr", "t": 1794465542.3415}
+{"ev": "assign", "client": "10.0.0.6", "cport": 57892, "server": "h2", "mode": "rr", "t": 1794465542.3642}
+{"ev": "assign", "client": "10.0.0.6", "cport": 57884, "server": "h3", "mode": "rr", "t": 1794465542.3644}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42610, "server": "h1", "mode": "rr", "t": 1794465542.3653}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42622, "server": "h2", "mode": "rr", "t": 1794465542.3655}
+{"ev": "assign", "client": "10.0.0.5", "cport": 41910, "server": "h3", "mode": "rr", "t": 1794465542.373}
+{"ev": "assign", "client": "10.0.0.5", "cport": 41918, "server": "h1", "mode": "rr", "t": 1794465542.4087}
+{"ev": "assign", "client": "10.0.0.6", "cport": 57904, "server": "h2", "mode": "rr", "t": 1794465542.4101}
+{"ev": "assign", "client": "10.0.0.7", "cport": 41190, "server": "h3", "mode": "rr", "t": 1794465542.4108}
+{"ev": "assign", "client": "10.0.0.7", "cport": 41206, "server": "h1", "mode": "rr", "t": 1794465542.4109}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42636, "server": "h2", "mode": "rr", "t": 1794465542.411}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42626, "server": "h3", "mode": "rr", "t": 1794465542.4112}
+{"ev": "assign", "client": "10.0.0.5", "cport": 41926, "server": "h1", "mode": "rr", "t": 1794465542.4122}
+{"ev": "assign", "client": "10.0.0.6", "cport": 57908, "server": "h2", "mode": "rr", "t": 1794465542.4127}
+{"ev": "assign", "client": "10.0.0.7", "cport": 41216, "server": "h3", "mode": "rr", "t": 1794465542.413}
+{"ev": "assign", "client": "10.0.0.5", "cport": 41928, "server": "h1", "mode": "rr", "t": 1794465542.415}
+{"ev": "assign", "client": "10.0.0.6", "cport": 57910, "server": "h2", "mode": "rr", "t": 1794465542.4171}
+{"ev": "assign", "client": "10.0.0.6", "cport": 57922, "server": "h3", "mode": "rr", "t": 1794465542.4259}
+{"ev": "assign", "client": "10.0.0.6", "cport": 57930, "server": "h1", "mode": "rr", "t": 1794465542.4321}
+{"ev": "assign", "client": "10.0.0.7", "cport": 41218, "server": "h2", "mode": "rr", "t": 1794465542.4377}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42646, "server": "h3", "mode": "rr", "t": 1794465542.4473}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42656, "server": "h1", "mode": "rr", "t": 1794465542.4541}
+{"ev": "assign", "client": "10.0.0.7", "cport": 41220, "server": "h2", "mode": "rr", "t": 1794465542.4542}
+{"ev": "assign", "client": "10.0.0.5", "cport": 41930, "server": "h3", "mode": "rr", "t": 1794465542.4544}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42668, "server": "h1", "mode": "rr", "t": 1794465542.4615}
+{"ev": "assign", "client": "10.0.0.5", "cport": 41938, "server": "h2", "mode": "rr", "t": 1794465542.4617}
+{"ev": "assign", "client": "10.0.0.6", "cport": 57940, "server": "h3", "mode": "rr", "t": 1794465542.4635}
+{"ev": "assign", "client": "10.0.0.7", "cport": 41222, "server": "h1", "mode": "rr", "t": 1794465542.4687}
+{"ev": "assign", "client": "10.0.0.6", "cport": 57942, "server": "h2", "mode": "rr", "t": 1794465542.4724}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42670, "server": "h3", "mode": "rr", "t": 1794465542.4758}
+{"ev": "assign", "client": "10.0.0.5", "cport": 41948, "server": "h1", "mode": "rr", "t": 1794465542.4846}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42686, "server": "h2", "mode": "rr", "t": 1794465542.4888}
+{"ev": "assign", "client": "10.0.0.7", "cport": 41230, "server": "h3", "mode": "rr", "t": 1794465542.4935}
+{"ev": "assign", "client": "10.0.0.7", "cport": 41246, "server": "h1", "mode": "rr", "t": 1794465542.4966}
+{"ev": "assign", "client": "10.0.0.5", "cport": 41962, "server": "h2", "mode": "rr", "t": 1794465542.4995}
+{"ev": "assign", "client": "10.0.0.6", "cport": 57946, "server": "h3", "mode": "rr", "t": 1794465542.5021}
+{"ev": "assign", "client": "10.0.0.5", "cport": 41968, "server": "h1", "mode": "rr", "t": 1794465542.5059}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42690, "server": "h2", "mode": "rr", "t": 1794465542.5123}
+{"ev": "assign", "client": "10.0.0.5", "cport": 41974, "server": "h3", "mode": "rr", "t": 1794465542.5131}
+{"ev": "assign", "client": "10.0.0.7", "cport": 41258, "server": "h1", "mode": "rr", "t": 1794465542.5191}
+{"ev": "assign", "client": "10.0.0.7", "cport": 41264, "server": "h2", "mode": "rr", "t": 1794465542.5192}
+{"ev": "assign", "client": "10.0.0.5", "cport": 41978, "server": "h3", "mode": "rr", "t": 1794465542.5244}
+{"ev": "assign", "client": "10.0.0.6", "cport": 57962, "server": "h1", "mode": "rr", "t": 1794465542.5365}
+{"ev": "assign", "client": "10.0.0.5", "cport": 41992, "server": "h2", "mode": "rr", "t": 1794465542.5404}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42716, "server": "h3", "mode": "rr", "t": 1794465542.5477}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42704, "server": "h1", "mode": "rr", "t": 1794465542.553}
+{"ev": "assign", "client": "10.0.0.5", "cport": 42008, "server": "h2", "mode": "rr", "t": 1794465542.5698}
+{"ev": "assign", "client": "10.0.0.7", "cport": 41274, "server": "h3", "mode": "rr", "t": 1794465542.5745}
+{"ev": "assign", "client": "10.0.0.6", "cport": 57974, "server": "h1", "mode": "rr", "t": 1794465542.58}
+{"ev": "assign", "client": "10.0.0.6", "cport": 57988, "server": "h2", "mode": "rr", "t": 1794465542.5804}
+{"ev": "assign", "client": "10.0.0.6", "cport": 58000, "server": "h3", "mode": "rr", "t": 1794465542.5805}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42730, "server": "h1", "mode": "rr", "t": 1794465542.5988}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42734, "server": "h2", "mode": "rr", "t": 1794465542.599}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42738, "server": "h3", "mode": "rr", "t": 1794465542.6012}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42744, "server": "h1", "mode": "rr", "t": 1794465542.6044}
+{"ev": "assign", "client": "10.0.0.7", "cport": 41282, "server": "h2", "mode": "rr", "t": 1794465542.6208}
+{"ev": "assign", "client": "10.0.0.7", "cport": 41296, "server": "h3", "mode": "rr", "t": 1794465542.6229}
+{"ev": "assign", "client": "10.0.0.5", "cport": 42020, "server": "h1", "mode": "rr", "t": 1794465542.6292}
+{"ev": "assign", "client": "10.0.0.5", "cport": 42032, "server": "h2", "mode": "rr", "t": 1794465542.6297}
+{"ev": "assign", "client": "10.0.0.6", "cport": 58002, "server": "h3", "mode": "rr", "t": 1794465542.6387}
+{"ev": "assign", "client": "10.0.0.7", "cport": 41312, "server": "h1", "mode": "rr", "t": 1794465542.6417}
+{"ev": "assign", "client": "10.0.0.5", "cport": 42060, "server": "h2", "mode": "rr", "t": 1794465542.6419}
+{"ev": "assign", "client": "10.0.0.6", "cport": 58012, "server": "h3", "mode": "rr", "t": 1794465542.6428}
+{"ev": "assign", "client": "10.0.0.5", "cport": 42046, "server": "h1", "mode": "rr", "t": 1794465542.6438}
+{"ev": "assign", "client": "10.0.0.6", "cport": 58014, "server": "h2", "mode": "rr", "t": 1794465542.666}
+{"ev": "assign", "client": "10.0.0.6", "cport": 58020, "server": "h3", "mode": "rr", "t": 1794465542.6681}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42758, "server": "h1", "mode": "rr", "t": 1794465542.6684}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42760, "server": "h2", "mode": "rr", "t": 1794465542.6777}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42770, "server": "h3", "mode": "rr", "t": 1794465542.6843}
+{"ev": "assign", "client": "10.0.0.6", "cport": 58028, "server": "h1", "mode": "rr", "t": 1794465542.6981}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42776, "server": "h2", "mode": "rr", "t": 1794465542.7015}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42784, "server": "h3", "mode": "rr", "t": 1794465542.7054}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42806, "server": "h1", "mode": "rr", "t": 1794465542.7297}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42794, "server": "h2", "mode": "rr", "t": 1794465542.7308}
+{"ev": "load", "server": "h3", "workers": "4", "active": "2", "queued": "0", "svc_ms": "53.2", "avg_ms": "88.1", "rps": "52.0", "served": "114", "t": 1794465542.7653}
+{"ev": "load", "server": "h1", "workers": "4", "active": "2", "queued": "0", "svc_ms": "53.5", "avg_ms": "98.0", "rps": "51.5", "served": "114", "t": 1794465542.7679}
+{"ev": "assign", "client": "10.0.0.4", "cport": 42812, "server": "h3", "mode": "rr", "t": 1794465542.77}
+{"ev": "load", "server": "h2", "workers": "4", "active": "3", "queued": "0", "svc_ms": "54.6", "avg_ms": "129.5", "rps": "52.0", "served": "114", "t": 1794465542.8342}
+{"ev": "load", "server": "h3", "workers": "4", "active": "0", "queued": "0", "svc_ms": "53.1", "avg_ms": "87.3", "rps": "53.5", "served": "117", "t": 1794465543.2693}
+{"ev": "load", "server": "h1", "workers": "4", "active": "0", "queued": "0", "svc_ms": "52.8", "avg_ms": "100.6", "rps": "44.5", "served": "117", "t": 1794465543.5504}
+{"ev": "port_stats", "ports": {"h1": {"to_server_mbps": 0.092, "from_server_mbps": 0.578, "util": 0.058}, "h2": {"to_server_mbps": 0.094, "from_server_mbps": 0.602, "util": 0.06}, "h3": {"to_server_mbps": 0.093, "from_server_mbps": 0.565, "util": 0.056}}, "t": 1794465543.5509}
+{"ev": "state", "servers": [{"name": "h1", "up": true, "overloaded": false, "active": 0, "queued": 0, "svc_ms": 52.8, "avg_ms": 100.6, "util": 0.058, "est": 0.0, "assigned_total": 117}, {"name": "h2", "up": true, "overloaded": false, "active": 3, "queued": 0, "svc_ms": 54.6, "avg_ms": 129.5, "util": 0.06, "est": 3.0, "assigned_total": 117}, {"name": "h3", "up": true, "overloaded": false, "active": 0, "queued": 0, "svc_ms": 53.1, "avg_ms": 87.3, "util": 0.056, "est": 0.0, "assigned_total": 117}], "t": 1794465543.5509}
+{"ev": "load", "server": "h3", "workers": "4", "active": "0", "queued": "0", "svc_ms": "52.4", "avg_ms": "84.7", "rps": "35.0", "served": "117", "t": 1794465543.7994}
+{"ev": "load", "server": "h3", "workers": "4", "active": "0", "queued": "0", "svc_ms": "52.7", "avg_ms": "86.0", "rps": "18.5", "served": "117", "t": 1794465544.3043}
+{"ev": "load", "server": "h1", "workers": "4", "active": "0", "queued": "0", "svc_ms": "51.4", "avg_ms": "78.9", "rps": "6.5", "served": "117", "t": 1794465544.6295}
+{"ev": "load", "server": "h3", "workers": "4", "active": "0", "queued": "0", "svc_ms": "50.6", "avg_ms": "50.9", "rps": "0.5", "served": "117", "t": 1794465544.8059}
+{"ev": "load", "server": "h2", "workers": "4", "active": "0", "queued": "0", "svc_ms": "0.0", "avg_ms": "0.0", "rps": "0.0", "served": "117", "t": 1794465544.894}
+{"ev": "port_stats", "ports": {"h1": {"to_server_mbps": 0.01, "from_server_mbps": 0.001, "util": 0.001}, "h2": {"to_server_mbps": 0.01, "from_server_mbps": 0.001, "util": 0.001}, "h3": {"to_server_mbps": 0.011, "from_server_mbps": 0.002, "util": 0.001}}, "t": 1794465545.0225}
+{"ev": "state", "servers": [{"name": "h1", "up": true, "overloaded": false, "active": 0, "queued": 0, "svc_ms": 51.4, "avg_ms": 78.9, "util": 0.001, "est": 0.0, "assigned_total": 117}, {"name": "h2", "up": true, "overloaded": false, "active": 0, "queued": 0, "svc_ms": 0.0, "avg_ms": 0.0, "util": 0.001, "est": 0.0, "assigned_total": 117}, {"name": "h3", "up": true, "overloaded": false, "active": 0, "queued": 0, "svc_ms": 50.6, "avg_ms": 50.9, "util": 0.001, "est": 0.0, "assigned_total": 117}], "t": 1794465545.0233}
+{"ev": "server_down", "server": "h2", "reason": "report connection closed", "t": 1794465545.0417}
+{"ev": "server_down", "server": "h1", "reason": "report connection closed", "t": 1794465545.0418}
+{"ev": "server_down", "server": "h3", "reason": "report connection closed", "t": 1794465545.0418}
+{"ev": "port_status", "port": 8, "up": false, "t": 1794465545.1068}
+{"ev": "port_status", "port": 1, "up": false, "t": 1794465545.5383}
+{"ev": "port_status", "port": 2, "up": false, "t": 1794465545.5869}
+{"ev": "port_status", "port": 3, "up": false, "t": 1794465545.6521}
+{"ev": "port_status", "port": 4, "up": false, "t": 1794465545.7007}
+{"ev": "port_status", "port": 5, "up": false, "t": 1794465545.8179}
+{"ev": "port_status", "port": 7, "up": false, "t": 1794465545.9236}
+{"ev": "port_status", "port": 6, "up": false, "t": 1794465545.9238}
