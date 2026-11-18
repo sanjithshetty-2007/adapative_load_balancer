@@ -208,3 +208,5 @@ pass ([results/d1/d1_test_report.md](results/d1/d1_test_report.md)).
 
 Roles, the problem statement and the D1 / D2 split per member are in
 [docs/Team_Roles_D1_D2.pdf](docs/Team_Roles_D1_D2.pdf).
+Each member's code (files, functions, line numbers) and the exact commands to
+run it, for D1 and D2: [docs/Member_Work_Explained.pdf](docs/Member_Work_Explained.pdf).
