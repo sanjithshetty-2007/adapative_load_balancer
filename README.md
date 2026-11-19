@@ -8,11 +8,23 @@ port counters). It detects **overloaded** and **failed** servers and reacts
 by installing different flow rules. A static round robin mode is included
 as the baseline, and the two are compared in repeated experiments.
 
-**Run the demo in the Ubuntu VM** (one window, three terminals, about 4 minutes):
+## Run the demo (Ubuntu VM)
+
+First time (downloads the project and runs the demo):
 
 ```bash
-cd ~ && if [ -d adapative_load_balancer/.git ]; then git -C adapative_load_balancer pull; else git clone https://github.com/sanjithshetty-2007/adapative_load_balancer.git; fi && cd adapative_load_balancer && bash run_demo.sh
+cd ~ && git clone https://github.com/sanjithshetty-2007/adapative_load_balancer.git && cd adapative_load_balancer && bash demo.sh
 ```
+
+Next times (gets the latest version and runs the demo):
+
+```bash
+cd ~/adapative_load_balancer && git pull && bash demo.sh
+```
+
+One window opens with three terminals: 1 controller, 2 Mininet, 3 client +
+tests. Everything runs by itself (about 4 minutes) and ends with PASS / FAIL
+checks and a normal `mininet>` prompt (`exit` closes everything).
 
 | Deliverable | Report | Raw results |
 |---|---|---|
