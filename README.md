@@ -41,7 +41,7 @@ then terminal 2, then terminal 3. Copy one box at a time.
 Clean up anything left from an earlier run (old controller, old network):
 
 ```bash
-sudo pkill -f pox.py; sudo tmux kill-server 2>/dev/null; sudo mn -c
+sudo pkill -f pox.py; sudo fuser -k 6633/tcp 9000/tcp; sudo tmux kill-server 2>/dev/null; sudo mn -c
 ```
 
 ```bash
