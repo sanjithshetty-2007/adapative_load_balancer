@@ -145,6 +145,18 @@ python3-matplotlib), clones POX into `~/pox`, then runs:
 
 Run only some D2 scenarios: `sudo python3 experiments/run_d2.py --only e2_hetero,e5_crash --reps 1`.
 
+### Quick automatic demo (3-4 minutes)
+
+```bash
+bash demo.sh                 # installs what is missing, then runs quick_demo.py
+bash demo.sh --step          # waits for Enter before each part
+```
+
+Part 1 shows the topology, ARP for the VIP, curl to the VIP and the rewrite
+rules. Part 2 is a live run in adaptive mode while h1 is overloaded, h2
+crashes and restarts, and h3's link goes down and up. Part 3 compares round
+robin and adaptive on unequal servers (15 s each).
+
 ### Live demo
 
 ```bash
