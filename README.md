@@ -22,9 +22,14 @@ Next times (gets the latest version and runs the demo):
 cd ~/adapative_load_balancer && git pull && bash demo.sh
 ```
 
-One window opens with three terminals: 1 controller, 2 Mininet, 3 client +
-tests. Everything runs by itself (about 4 minutes) and ends with PASS / FAIL
-checks and a normal `mininet>` prompt (`exit` closes everything).
+`bash demo.sh` runs the whole demo in this one terminal (about 3-4 minutes):
+Part 1 network and SDN controller (topology, pingall, curl to the VIP, ARP,
+flow rules), Part 2 a live table while h1 is overloaded, h2 crashes and
+restarts and h3's link goes down and up, Part 3 static round robin vs
+adaptive. `bash demo.sh --step` waits for Enter before each part.
+
+Three separate terminals instead (controller, Mininet, client + tests):
+`bash run_demo.sh`, or type the commands yourself from [DEMO.md](DEMO.md).
 
 | Deliverable | Report | Raw results |
 |---|---|---|
