@@ -147,6 +147,8 @@ Run only some D2 scenarios: `sudo python3 experiments/run_d2.py --only e2_hetero
 
 ### Demo with three terminals (controller, Mininet, client)
 
+`bash run_demo.sh` opens one window with the three terminals and runs the
+whole demo and the tests automatically.
 Step-by-step commands for each terminal are in [DEMO.md](DEMO.md).
 `bash setup.sh` installs everything once; `bash demo/rehearsal.sh` runs
 the whole demo automatically (about 3 minutes) and checks every step.

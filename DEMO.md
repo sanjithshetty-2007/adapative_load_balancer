@@ -1,5 +1,22 @@
 # Demo: three terminals (about 5 minutes)
 
+## One command (does everything below automatically)
+
+```bash
+cd ~/adapative_load_balancer && git pull && bash run_demo.sh
+```
+
+One window opens, split into three terminals: **1 controller** (top),
+**2 Mininet** (middle), **3 client + tests** (bottom). The Mininet commands
+are typed in automatically one by one with a short note above each; the
+client runs for 90 s while h1 is overloaded, h2 crashes and restarts and
+h3's link goes down and up; then the unit and socket tests run in terminal
+3 and terminal 2 prints PASS / FAIL checks. You are then left at a normal
+`mininet>` prompt: type more commands, or `exit` to close everything.
+Click a terminal to type in it; scroll with the mouse wheel.
+
+## By hand: the same steps, typed yourself
+
 | Terminal | Runs | What you see there |
 |---|---|---|
 | 1 Controller | POX SDN controller (`adaptive_lb`) | servers coming UP / DOWN, OVERLOADED, flow rules deleted |

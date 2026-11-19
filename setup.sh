@@ -1,6 +1,6 @@
 #!/bin/bash
 # Install what the project needs in the Ubuntu VM (run once):
-# Mininet, Open vSwitch, matplotlib and the POX controller in ~/pox.
+# Mininet, Open vSwitch, matplotlib, tmux and the POX controller in ~/pox.
 #
 #   bash setup.sh
 
@@ -10,7 +10,7 @@ POX_DIR=${POX_DIR:-$HOME/pox}
 sudo -v || { echo "sudo failed"; exit 1; }
 
 need=""
-for p in mininet openvswitch-switch python3-matplotlib git curl iproute2; do
+for p in mininet openvswitch-switch python3-matplotlib git curl iproute2 tmux; do
   dpkg -s "$p" >/dev/null 2>&1 || need="$need $p"
 done
 if [ -n "$need" ]; then
