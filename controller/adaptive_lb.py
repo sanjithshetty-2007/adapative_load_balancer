@@ -453,6 +453,8 @@ class AdaptiveLB(object):
 
         self._log({"ev": "flows_deleted", "server": name,
                    "connections": removed})
+        log.warning("%s FLOW RULES DELETED (%d connections will be re-placed)",
+                    name, removed)
 
 
 def _parse_servers(text):

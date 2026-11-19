@@ -102,6 +102,30 @@ def worker(args, thread_no, deadline, results, lock, counter):
             time.sleep(args.think)
 
 
+def progress(results, lock, start, stop, every=2.0):
+    """Print one line every `every` seconds: what finished in that interval."""
+
+    seen = 0
+
+    while not stop.wait(every):
+
+        with lock:
+            new = results[seen:]
+            seen = len(results)
+
+        ok = [r for r in new if r[7] == 1]
+        per = {}
+        for r in ok:
+            per[r[5]] = per.get(r[5], 0) + 1
+        avg = statistics.mean(r[6] for r in ok) if ok else 0.0
+        servers = "  ".join("%s %3d" % (s, per.get(s, 0))
+                            for s in sorted(set(per) | {"h1", "h2", "h3"}))
+
+        print("%4.0fs | last %.0fs: %3d ok %3d failed | %s | avg %4.0f ms"
+              % (time.time() - start, every, len(ok), len(new) - len(ok),
+                 servers, avg), flush=True)
+
+
 def summarize(rows, wall_s):
 
     ok_rows = [r for r in rows if r[7] == 1]
@@ -155,6 +179,9 @@ def main():
     parser.add_argument("--out", default="")
     parser.add_argument("--summary", default="",
                         help="Write the summary as JSON to this file")
+    parser.add_argument("--progress", action="store_true",
+                        help="Print a line every 2 s showing which servers "
+                             "answered, and a readable summary at the end")
     args = parser.parse_args()
 
     if not args.duration and not args.requests:
@@ -172,12 +199,22 @@ def main():
                                       counter))
                for i in range(args.threads)]
 
+    stop = threading.Event()
+
+    if args.progress:
+        print("Client %s: %d threads -> %s:%d, one new TCP connection per "
+              "request" % (args.name, args.threads, args.vip, args.port),
+              flush=True)
+        threading.Thread(target=progress, args=(results, lock, start, stop),
+                         daemon=True).start()
+
     for t in threads:
         t.start()
 
     for t in threads:
         t.join()
 
+    stop.set()
     wall = time.time() - start
     results.sort(key=lambda r: r[0])
 
@@ -196,7 +233,17 @@ def main():
         with open(args.summary, "w") as f:
             json.dump(summary, f, indent=2)
 
-    print(json.dumps(summary), flush=True)
+    if args.progress:
+        print("\nDone in %.0f s: %d requests, %d ok, %d failed, %d needed a "
+              "retry" % (wall, summary["requests"], summary["ok"],
+                         summary["failed"], summary["retried"]))
+        print("Latency: average %.0f ms, p95 %.0f ms. Throughput %.0f req/s"
+              % (summary["avg_ms"], summary["p95_ms"],
+                 summary["throughput_rps"]))
+        print("Served by: " + ", ".join(
+            "%s %d" % kv for kv in summary["per_server"].items()), flush=True)
+    else:
+        print(json.dumps(summary), flush=True)
 
 
 if __name__ == "__main__":

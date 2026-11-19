@@ -145,17 +145,11 @@ python3-matplotlib), clones POX into `~/pox`, then runs:
 
 Run only some D2 scenarios: `sudo python3 experiments/run_d2.py --only e2_hetero,e5_crash --reps 1`.
 
-### Quick automatic demo (3-4 minutes)
+### Demo with three terminals (controller, Mininet, client)
 
-```bash
-bash demo.sh                 # installs what is missing, then runs quick_demo.py
-bash demo.sh --step          # waits for Enter before each part
-```
-
-Part 1 shows the topology, ARP for the VIP, curl to the VIP and the rewrite
-rules. Part 2 is a live run in adaptive mode while h1 is overloaded, h2
-crashes and restarts, and h3's link goes down and up. Part 3 compares round
-robin and adaptive on unequal servers (15 s each).
+Step-by-step commands for each terminal are in [DEMO.md](DEMO.md).
+`bash setup.sh` installs everything once; `bash demo/rehearsal.sh` runs
+the whole demo automatically (about 3 minutes) and checks every step.
 
 ### Live demo
 
@@ -170,24 +164,8 @@ down.
 
 ### By hand (three terminals)
 
-```bash
-# 1: controller
-cd ~/pox && PYTHONPATH=~/adaptive-load-balancer-mininet/controller \
-  python3 pox.py openflow.of_01 --port=6633 adaptive_lb --mode=adaptive \
-  --events=/tmp/events.jsonl
-
-# 2: network
-cd ~/adaptive-load-balancer-mininet
-sudo mn --custom topology/topology.py --topo adaptive --link tc --mac \
-        --switch ovsk --controller remote,ip=127.0.0.1,port=6633
-mininet> h1 python3 app/backend_server.py --name h1 --report-to 10.0.0.254:9000 &
-mininet> h2 python3 app/backend_server.py --name h2 --report-to 10.0.0.254:9000 &
-mininet> h3 python3 app/backend_server.py --name h3 --report-to 10.0.0.254:9000 &
-mininet> h4 python3 app/client.py --threads 8 --requests 10
-
-# 3: watch
-tail -f /tmp/events.jsonl
-```
+See [DEMO.md](DEMO.md). At the `mininet>` prompt write `--name=h1` (with
+`=`): Mininet replaces a separate word that is a host name with its IP.
 
 Controller options: `--mode=rr|adaptive --overload_ms=250 --overload_queue=2
 --overload_util=0.8 --heartbeat=2 --stats_interval=1 --link_mbps=10`.
