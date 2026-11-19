@@ -10,7 +10,7 @@ scenarios, and the evaluation of static round robin against adaptive.
 | Dynamic SDN functionality | 6 | [section 2](#2-dynamic-sdn-functionality) |
 | Challenging scenario / robustness | 4 | [section 3](#3-challenging-scenarios-and-robustness) |
 | Performance evaluation & comparison | 5 | [section 4](#4-performance-evaluation-static-vs-adaptive) |
-| Documentation, final demo, viva | 6 | [section 5](#5-documentation-demo-and-viva), [README](../README.md) |
+| Documentation, final demo, viva | 6 | [section 5](#5-documentation-and-demo), [README](../README.md) |
 
 D1 (architecture, sockets, topology, first tests) is in
 [D1_report.md](D1_report.md).
@@ -319,7 +319,7 @@ tests `test_fresh_report_does_not_attract_a_burst`,
 * Rules are per connection, so a very high connection rate means many
   PacketIns. Wildcard rules per client would scale better but react slower.
 
-## 5. Documentation, demo and viva
+## 5. Documentation and demo
 
 * **Reproduce everything**: `bash run_all.sh` (see [README](../README.md#5-how-to-run)).
   It installs dependencies, runs the 26 unit tests, 9 socket tests, 10 D1
@@ -330,40 +330,3 @@ tests `test_fresh_report_does_not_attract_a_burst`,
 * **Test cases**: `tests/` (unit, socket, D1 end-to-end) and
   `experiments/run_d2.py` (all D2 scenarios, with the exact parameters in
   [results/d2/scenarios.json](../results/d2/scenarios.json)).
-
-### Suggested demo order (about 8 minutes)
-
-1. `sudo python3 demo.py --unequal` and `watch.py` in a second terminal.
-2. `h4 python3 app/client.py --threads 16 --duration 30 &`: watch.py
-   shows h1 getting most new connections and h3 the fewest.
-3. Overload h1 (command printed by demo.py): h1 turns OVERLOADED and its
-   new connections drop.
-4. `h2 pkill -f "backend_server.py --name h2"`: h2 DOWN within
-   milliseconds, `flows_deleted` event; restart it and it comes back.
-5. `link s1 h3 down` / `up`.
-6. Show the D2 graphs.
-
-### Who presents what
-
-| Member | D2 part | Scenarios shown |
-|---|---|---|
-| P1 Sanjith | Dynamic SDN: port statistics, link failure via PortStatus, flow deletion for failed servers, live demo | E4 link flood, E6 link down |
-| P2 Sammed | Complete application and robustness: crash and hang detection, retries, scenario runner, watch.py | E3 overload, E5 crash + restart |
-| P3 Sharvesh | Adaptive policy, overload detection with hysteresis, performance evaluation and graphs | E1 equal, E2 unequal, results |
-
-Full roles for D1 and D2: [Team_Roles_D1_D2.pdf](Team_Roles_D1_D2.pdf).
-
-### Viva questions to be ready for
-
-| Question | Short answer |
-|---|---|
-| Why does the controller answer ARP for the VIP? | No host owns 10.0.0.100. The controller replies with a virtual MAC, so clients send to it and the switch rules rewrite to a real server. |
-| Why install the reverse rule first? | The server's SYN-ACK could reach the switch before the reverse rule exists and get sent to the controller or dropped. |
-| How does a server in a Mininet namespace reach POX? | Through `ctl` (10.0.0.254), a Mininet host in the root namespace. POX listens on 0.0.0.0:9000. |
-| How is network load measured? | OpenFlow port statistics every 1 s: the change in byte counters over time gives bits/s, divided by 10 Mbit/s. |
-| How is a crash detected so fast? | The server's report TCP connection closes when the process dies; the controller's `recv` returns empty. |
-| What if a server hangs but its socket stays open? | The 2 s heartbeat: no report for 2 s means down. |
-| Why is adaptive not always better? | With equal servers and steady load, round robin is already a perfect split; adaptive can only match it. Its value shows when servers or links differ, or something fails. |
-| Why a penalty instead of excluding overloaded servers? | An excluded server gets no traffic, so its measurements never change and it may never be readmitted. The first version had exactly this bug. |
-| What does hysteresis do here? | Different thresholds to enter and leave overload, so a server near the limit does not flip every report. |
-| Static round robin also logs overload/failure. Why? | Monitoring is the same in both modes, for a fair comparison. Only the decision differs. |
