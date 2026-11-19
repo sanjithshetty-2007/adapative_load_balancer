@@ -38,8 +38,10 @@ then terminal 2, then terminal 3. Copy one box at a time.
 
 ### Terminal 1: controller (POX)
 
+Clean up anything left from an earlier run (old controller, old network):
+
 ```bash
-sudo mn -c
+sudo pkill -f pox.py; sudo tmux kill-server 2>/dev/null; sudo mn -c
 ```
 
 ```bash
