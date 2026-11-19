@@ -31,6 +31,108 @@ adaptive. `bash demo.sh --step` waits for Enter before each part.
 Three separate terminals instead (controller, Mininet, client + tests):
 `bash run_demo.sh`, or type the commands yourself from [DEMO.md](DEMO.md).
 
+## Demo in three terminals (copy each command)
+
+Open three terminals in the VM. Run the commands in this order: terminal 1,
+then terminal 2, then terminal 3. Copy one box at a time.
+
+### Terminal 1: controller (POX)
+
+```bash
+sudo mn -c
+```
+
+```bash
+cd ~/pox && PYTHONPATH=~/adapative_load_balancer/controller python3 pox.py openflow.of_01 --port=6633 adaptive_lb --mode=adaptive --events=/tmp/lb_events.jsonl
+```
+
+Leave it running. It shows `h1 SERVER_UP`, `h1 OVERLOADED`, `h2 SERVER_DOWN`,
+`h2 FLOW RULES DELETED` and so on as things happen.
+
+### Terminal 2: Mininet
+
+```bash
+cd ~/adapative_load_balancer && sudo mn --custom topology/topology.py --topo adaptive --link tc --mac --switch ovsk --controller remote,ip=127.0.0.1,port=6633
+```
+
+Then at the `mininet>` prompt, one line at a time:
+
+```
+net
+```
+
+```
+h1 python3 app/backend_server.py --name=h1 --report-to 10.0.0.254:9000 > /tmp/h1.log 2>&1 &
+```
+
+```
+h2 python3 app/backend_server.py --name=h2 --report-to 10.0.0.254:9000 > /tmp/h2.log 2>&1 &
+```
+
+```
+h3 python3 app/backend_server.py --name=h3 --report-to 10.0.0.254:9000 > /tmp/h3.log 2>&1 &
+```
+
+```
+pingall
+```
+
+```
+h4 curl -s 10.0.0.100:8080
+```
+
+```
+h4 ip -c=never neigh show 10.0.0.100
+```
+
+```
+sh ovs-ofctl dump-flows s1 | grep mod_nw
+```
+
+### Terminal 3: client
+
+```bash
+cd ~/adapative_load_balancer && sudo bash demo/inhost.sh h4 python3 app/client.py --threads 16 --duration 120 --progress
+```
+
+Every 2 s it shows how many requests h1, h2 and h3 answered.
+
+### Back in terminal 2, while the client runs (about 15 s apart)
+
+Overload h1 (terminal 1: `h1 OVERLOADED`; terminal 3: h1's count drops):
+
+```
+h7 python3 app/client.py --vip 10.0.0.1 --threads 8 --work-ms 400 --duration 15 > /tmp/hog.log 2>&1 &
+```
+
+Crash h2 (terminal 1: `h2 SERVER_DOWN`, `h2 FLOW RULES DELETED`; terminal 3: h2 goes to 0):
+
+```
+h2 pkill -f "backend_server.py --name=h2"
+```
+
+Restart h2 (terminal 1: `h2 SERVER_UP`):
+
+```
+h2 python3 app/backend_server.py --name=h2 --report-to 10.0.0.254:9000 > /tmp/h2.log 2>&1 &
+```
+
+Take h3's link down (terminal 1: `h3 SERVER_DOWN (switch port down)`):
+
+```
+link s1 h3 down
+```
+
+Bring it back up (terminal 1: `h3 SERVER_UP`):
+
+```
+link s1 h3 up
+```
+
+### Finish
+
+Terminal 2: `exit`. Terminal 1: `Ctrl+C`. Then `sudo mn -c`.
+
 | Deliverable | Report | Raw results |
 |---|---|---|
 | D1: design, sockets, Mininet + SDN, first tests | [docs/D1_report.md](docs/D1_report.md) | [results/d1/](results/d1/) |
