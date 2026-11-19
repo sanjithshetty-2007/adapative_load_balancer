@@ -139,6 +139,7 @@ Terminal 2: `exit`. Terminal 1: `Ctrl+C`. Then `sudo mn -c`.
 |---|---|---|
 | D1: design, sockets, Mininet + SDN, first tests | [docs/D1_report.md](docs/D1_report.md) | [results/d1/](results/d1/) |
 | D2: full system, dynamic SDN, robustness, evaluation | [docs/D2_report.md](docs/D2_report.md) | [results/d2/](results/d2/) |
+| Project report (D1 + D2, PDF) | [docs/Project_Report_D1_D2.pdf](docs/Project_Report_D1_D2.pdf) | all of the above |
 
 ## 1. Architecture
 
